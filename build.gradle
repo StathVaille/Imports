@@ -11,24 +11,24 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'spring-boot'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
 
 jar {
-    baseName = 'marketimports'
-    version = '0.0.1-SNAPSHOT'
+	baseName = 'demo'
+	version = '0.0.1-SNAPSHOT'
 }
+
 sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()
 }
 
-dependencies {
-	compile('org.springframework.boot:spring-boot-devtools')
-	compile('org.projectlombok:lombok')
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.8.4')
 
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.8.4')
 }
