@@ -1,21 +1,18 @@
 package com.github.stathvaille.marketimports.service;
 
-import com.github.stathvaille.marketimports.domain.esi.MarketOrder;
-import com.github.stathvaille.marketimports.domain.location.ImportLocation;
+import com.github.stathvaille.marketimports.domain.staticdataexport.Item;
 import com.github.stathvaille.marketimports.domain.staticdataexport.Items;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
-import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,11 +20,18 @@ import static org.junit.Assert.assertThat;
 public class ItemServiceTest {
 
     @Autowired Items items;
+    @Autowired ItemService itemService;
 
     @Test
     public void itemsLoadedTest() throws Exception {
         assertThat(items, notNullValue());
-
     }
 
+    @Test
+    public void getItemByNameTest() {
+        Optional<Item> item  = itemService.getItemByName("Atron");
+        assertThat(item.isPresent(), is(true));
+        assertThat(item.get().getTypeId(), equalTo(608L));
+        assertThat(item.get().getName().getEn(), equalTo("Atron"));
+    }
 }
