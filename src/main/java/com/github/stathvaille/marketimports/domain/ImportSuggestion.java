@@ -1,7 +1,6 @@
 package com.github.stathvaille.marketimports.domain;
 
 import lombok.Value;
-
 import java.util.Date;
 
 @Value
@@ -18,5 +17,4 @@ public class ImportSuggestion {
     long minPriceInSource;
     Date lastUpdatedInSource;
     double margin;
-
 }
