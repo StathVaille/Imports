@@ -16,7 +16,7 @@ import java.io.InputStream;
 import java.util.Map;
 
 @Configuration
-public class ItemConfig {
+public class ItemConfiguration {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 

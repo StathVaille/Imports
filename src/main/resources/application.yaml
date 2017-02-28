@@ -1,2 +1,14 @@
 ---
 server.port: 5000
+
+importSource:
+  regionId: 10000043
+  regionName: "Domain"
+  stationId: 60008494
+  stationName: "Amarr VIII (Oris) - Emperor Family Academy"
+
+importDestination:
+  regionId: 10000014
+  regionName: "Catch"
+  stationId: 61000182
+  stationName: "GE-8JV"

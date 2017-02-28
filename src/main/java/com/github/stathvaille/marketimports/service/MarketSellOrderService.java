@@ -1,6 +1,7 @@
 package com.github.stathvaille.marketimports.service;
 
 import com.github.stathvaille.marketimports.domain.esi.MarketOrder;
+import com.github.stathvaille.marketimports.domain.location.ImportLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -19,19 +20,16 @@ public class MarketSellOrderService {
     private static final String urlTemplate = "https://esi.tech.ccp.is/latest/markets/%s/orders/?datasource=tranquility&order_type=sell&page=1&type_id=%s";
     private static final Logger logger = LoggerFactory.getLogger(MarketSellOrderService.class);
 
-    public List<MarketOrder> getItemOrders(long stationId, long typeId){
-        // TODO look up region Id from station Id
-        long regionId = 10000014;
-
+    public List<MarketOrder> getItemOrders(ImportLocation importDestination, long typeId){
         RestTemplate restTemplate = new RestTemplate();
-        String url = String.format(urlTemplate, regionId, typeId);
+        String url = String.format(urlTemplate, importDestination.getRegionId(), typeId);
         MarketOrder[] marketOrderArray = restTemplate.getForObject(url, MarketOrder[].class);
 
         List<MarketOrder> marketOrders = Arrays.asList(marketOrderArray);
-        logger.info(String.format("Retrieved %d market orders for region %d", marketOrders.size(), regionId));
+        logger.info(String.format("Retrieved %d market orders for region %d", marketOrders.size(), importDestination.getRegionId()));
 
-        marketOrders = filterToStation(marketOrders, stationId);
-        logger.info(String.format("Filtered market orders down to %d in station %s", marketOrders.size(), stationId));
+        marketOrders = filterToStation(marketOrders, importDestination.getStationId());
+        logger.info(String.format("Filtered market orders down to %d in station %s", marketOrders.size(), importDestination.getStationId()));
 
         return marketOrders;
     }
