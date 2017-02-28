@@ -34,4 +34,10 @@ public class ItemServiceTest {
         assertThat(item.get().getTypeId(), equalTo(608L));
         assertThat(item.get().getName().getEn(), equalTo("Atron"));
     }
+
+    @Test
+    public void getMissingItemTest() {
+        Optional<Item> item  = itemService.getItemByName("Not an Atron");
+        assertThat(item.isPresent(), is(false));
+    }
 }
