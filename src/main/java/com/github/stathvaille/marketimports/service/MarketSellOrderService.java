@@ -9,6 +9,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -34,9 +36,16 @@ public class MarketSellOrderService {
         return marketOrders;
     }
 
+    public Map<Long, List<MarketOrder>> getMultipleItemOrders(ImportLocation importDestination, List<Long> typeIds){
+        return typeIds.stream()
+                .map(typeId -> getItemOrders(importDestination, typeId))
+                .flatMap(marketOrdersList -> marketOrdersList.stream())
+                .collect(Collectors.groupingBy(MarketOrder::getType_id));
+    }
+
     private List<MarketOrder> filterToStation(List<MarketOrder> marketOrders, long stationId) {
-        return marketOrders.stream()
-                .filter(marketOrder -> marketOrder.getLocation_id() == stationId)
-                .collect(Collectors.toList());
+    return marketOrders.stream()
+            .filter(marketOrder -> marketOrder.getLocation_id() == stationId)
+            .collect(Collectors.toList());
     }
 }

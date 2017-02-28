@@ -9,8 +9,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
+import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
@@ -29,4 +32,15 @@ public class MarketSellOrderServiceTest {
         List<MarketOrder> marketOrderList = marketSellOrderService.getItemOrders(importDestination, 608);
         assertThat(marketOrderList, notNullValue());
     }
+
+    @Test
+    public void getMultipleItemOrders() throws Exception {
+
+        List<Long> typeIds = Arrays.asList(608L, 609L);
+        Map<Long, List<MarketOrder>> marketOrderList = marketSellOrderService.getMultipleItemOrders(importDestination, typeIds);
+
+        assertThat(marketOrderList, notNullValue());
+        assertThat(marketOrderList.keySet(), hasItems(608L, 609L));
+    }
+
 }

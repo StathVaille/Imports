@@ -1,5 +1,6 @@
 package com.github.stathvaille.marketimports.domain;
 
+import com.github.stathvaille.marketimports.configuration.LocationConfiguration;
 import lombok.Value;
 import java.util.Date;
 
@@ -16,5 +17,7 @@ public class ImportSuggestion {
     int distinctMarketOrdersInDestination;
     long minPriceInSource;
     Date lastUpdatedInSource;
+    LocationConfiguration importSource;
+    LocationConfiguration importDestination;
     double margin;
 }
