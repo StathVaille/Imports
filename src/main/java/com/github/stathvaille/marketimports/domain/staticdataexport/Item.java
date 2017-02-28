@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Item {
+    private long typeId;
     private int graphicID;
     private int groupID;
     private LocalisedString description;

@@ -26,7 +26,9 @@ public class ItemConfiguration {
         logger.info("Reading item types map from " + itemsFileLocation + ". This can take a while...");
         ObjectMapper yamlObjectMapper = new ObjectMapper(new YAMLFactory());
         InputStream inputStream = new ClassPathResource(itemsFileLocation).getInputStream();
-        Map<Integer, Item> itemMap = yamlObjectMapper.readValue(inputStream, new TypeReference<Map<Integer, Item>>() {});
+        Map<Long, Item> itemMap = yamlObjectMapper.readValue(inputStream, new TypeReference<Map<Long, Item>>() {});
+
+        itemMap.keySet().forEach(itemId -> itemMap.get(itemId).setTypeId(itemId));
 
         logger.info("Read in " + itemMap.size() + " items.");
         return new Items(itemMap);

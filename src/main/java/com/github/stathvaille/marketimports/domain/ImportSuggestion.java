@@ -1,14 +1,13 @@
 package com.github.stathvaille.marketimports.domain;
 
 import com.github.stathvaille.marketimports.configuration.LocationConfiguration;
+import com.github.stathvaille.marketimports.domain.staticdataexport.Item;
 import lombok.Value;
 import java.util.Date;
 
 @Value
 public class ImportSuggestion {
-    String typeId;
-    String name;
-    double volume;
+    Item item;
     int numLost;
     long totalIskLost;
     long itemsLostInDestination;

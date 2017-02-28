@@ -5,9 +5,9 @@ import com.github.stathvaille.marketimports.domain.staticdataexport.Item;
 import java.util.Map;
 
 public class Items {
-    private final Map<Integer, Item> items;
+    private final Map<Long, Item> items;
 
-    public Items(Map<Integer, Item> items){
+    public Items(Map<Long, Item> items){
         this.items = items;
     }
 }
