@@ -1,4 +1,4 @@
-package com.github.stathvaille.marketimports.domain;
+package com.github.stathvaille.marketimports.domain.staticdataexport;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;

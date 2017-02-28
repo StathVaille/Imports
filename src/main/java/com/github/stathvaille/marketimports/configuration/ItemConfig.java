@@ -1,7 +1,7 @@
 package com.github.stathvaille.marketimports.configuration;
 
-import com.github.stathvaille.marketimports.domain.Item;
-import com.github.stathvaille.marketimports.domain.Items;
+import com.github.stathvaille.marketimports.domain.staticdataexport.Item;
+import com.github.stathvaille.marketimports.domain.staticdataexport.Items;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -19,10 +19,10 @@ import java.util.Map;
 public class ItemConfig {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final String itemsFileLocation = "typeIDs.yaml";
 
     @Bean
     public Items items() throws IOException {
+        String itemsFileLocation = "typeIDs.yaml";
         logger.info("Reading item types map from " + itemsFileLocation + ". This can take a while...");
         ObjectMapper yamlObjectMapper = new ObjectMapper(new YAMLFactory());
         InputStream inputStream = new ClassPathResource(itemsFileLocation).getInputStream();
