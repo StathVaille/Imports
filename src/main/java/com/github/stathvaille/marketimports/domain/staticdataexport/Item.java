@@ -12,4 +12,9 @@ public class Item {
     private LocalisedString description;
     private LocalisedString name;
     private double volume;
+
+    @Override
+    public String toString(){
+        return name.getEn();
+    }
 }

@@ -19,12 +19,7 @@ public class SwaggerConfiguration {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.any())
-                //.paths(PathSelectors.any())
-                .paths(paths())
+                .paths(Predicates.not(PathSelectors.regex("/error"))) // Exclude Spring error controllers
                 .build();
-    }
-
-    private Predicate<String> paths() {
-        return Predicates.not(PathSelectors.regex("/basic-error-controller.*"));
     }
 }

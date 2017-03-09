@@ -22,6 +22,13 @@ public class MarketSellOrderService {
     private static final String urlTemplate = "https://esi.tech.ccp.is/latest/markets/%s/orders/?datasource=tranquility&order_type=sell&page=1&type_id=%s";
     private static final Logger logger = LoggerFactory.getLogger(MarketSellOrderService.class);
 
+    private final ItemService itemService;
+
+    public MarketSellOrderService(ItemService itemService) {
+        this.itemService = itemService;
+    }
+
+
     public List<MarketOrder> getItemOrders(ImportLocation importLocation, Item item){
         RestTemplate restTemplate = new RestTemplate();
         String url = String.format(urlTemplate, importLocation.getRegionId(), item.getTypeId());
@@ -41,14 +48,15 @@ public class MarketSellOrderService {
     /**
      * Get market information of sell orders at a specific location
      * @param importLocation The market to search sell orders for
-     * @param items A list of itemms to search sell orders for
+     * @param items A list of items to search sell orders for
      */
-    public Map<Long, List<MarketOrder>> getMultipleItemOrders(ImportLocation importLocation, List<Item> items){
+    public Map<Item, List<MarketOrder>> getMultipleItemOrders(ImportLocation importLocation, List<Item> items){
         logger.info(String.format("Getting market orders at %s for %d distinct types", importLocation.getStationName(), items.size()));
-        Map<Long, List<MarketOrder>> marketOrders = items.parallelStream()
+        Map<Item, List<MarketOrder>> marketOrders = items.parallelStream()
                 .map(item -> getItemOrders(importLocation, item))
                 .flatMap(marketOrdersList -> marketOrdersList.stream())
-                .collect(Collectors.groupingBy(MarketOrder::getType_id));
+                //.collect(Collectors.groupingBy(MarketOrder::getType_id));
+                .collect(Collectors.groupingBy(marketOrder -> itemService.getItemById(marketOrder.getType_id()).get()));
         logger.info("Got " + marketOrders.size() + " market orders");
         return marketOrders;
     }

@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -58,10 +59,13 @@ public class MarketSellOrderServiceTest {
     public void getMultipleItemOrders() throws Exception {
 
         List<Item> items = Arrays.asList(atron, maulus);
-        Map<Long, List<MarketOrder>> marketOrderList = marketSellOrderService.getMultipleItemOrders(importDestination, items);
+        Map<Item, List<MarketOrder>> marketOrderList = marketSellOrderService.getMultipleItemOrders(importDestination, items);
 
         assertThat(marketOrderList, notNullValue());
-        assertThat(marketOrderList.keySet(), hasItems(608L, 609L));
+        assertThat(marketOrderList.keySet()
+                .stream()
+                .map(item -> item.getTypeId())
+                .collect(Collectors.toList()), hasItems(608L, 609L));
     }
 
 }
