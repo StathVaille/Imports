@@ -38,6 +38,11 @@ public class MarketSellOrderService {
         return marketOrders;
     }
 
+    /**
+     * Get market information of sell orders at a specific location
+     * @param importLocation The market to search sell orders for
+     * @param items A list of itemms to search sell orders for
+     */
     public Map<Long, List<MarketOrder>> getMultipleItemOrders(ImportLocation importLocation, List<Item> items){
         logger.info(String.format("Getting market orders at %s for %d distinct types", importLocation.getStationName(), items.size()));
         Map<Long, List<MarketOrder>> marketOrders = items.parallelStream()

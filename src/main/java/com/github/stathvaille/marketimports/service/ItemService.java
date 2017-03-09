@@ -35,4 +35,8 @@ public class ItemService {
             throw new RuntimeException(String.format("More than one item found with name %s", itemName));
         }
     }
+
+    public Optional<Item> getItemById(Long itemId){
+        return items.containsKey(itemId) ? Optional.of(items.get(itemId)) : Optional.empty();
+    }
 }
