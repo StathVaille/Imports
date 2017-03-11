@@ -7,4 +7,9 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LocalisedString {
     private String en;
+
+    @Override
+    public String toString(){
+        return en;
+    }
 }

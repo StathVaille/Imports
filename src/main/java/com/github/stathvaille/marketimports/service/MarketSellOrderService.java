@@ -40,7 +40,7 @@ public class MarketSellOrderService {
                                                                                             importLocation.getRegionName()));
 
         marketOrders = filterToStation(marketOrders, importLocation.getStationId());
-        logger.info(String.format("Filtered market orders down to %d in station %s", marketOrders.size(), importLocation.getStationId()));
+        logger.info(String.format("Filtered market orders down to %d in station %s", marketOrders.size(), importLocation.getStationName()));
 
         return marketOrders;
     }

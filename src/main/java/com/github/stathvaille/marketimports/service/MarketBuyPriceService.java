@@ -26,6 +26,7 @@ public class MarketBuyPriceService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public Double getItem5PercentBuyPrice(Item item, ImportLocation location){
+        logger.info("Calculating a 5% buy price for " + item.getName() + " in " + location.getSystemName());
 
         RestTemplate restTemplate = new RestTemplate();
         String url = String.format(apiTemplate, item.getTypeId(), location.getSystemId());

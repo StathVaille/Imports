@@ -16,6 +16,8 @@ public class ImportSuggestion {
     long volRemainingInDestination;
     int distinctMarketOrdersInDestination;
 
+    double numberSoldInDestinationPerDay;
+
     Double minPriceInSource;
 
     ImportLocation importSource;

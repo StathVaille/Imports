@@ -23,10 +23,12 @@ public class ImportSuggestionService {
     private final ImportLocation importSource;
     private final ImportLocation importDestination;
     private final Double desiredMargin;
+    private final MarketHistoryService marketHistoryService;
 
     public ImportSuggestionService(@Autowired @Qualifier("interestingItems") List<Item> interestingItems,
                                    MarketSellOrderService marketSellOrderService,
                                    MarketBuyPriceService marketBuyPriceService,
+                                   MarketHistoryService marketHistoryService,
                                    @Autowired @Qualifier("importSource") ImportLocation importSource,
                                    @Autowired @Qualifier("importDestination") ImportLocation importDestination,
                                    @Autowired @Qualifier("desiredMargin") Double desiredMargin) {
@@ -36,18 +38,27 @@ public class ImportSuggestionService {
         this.importSource = importSource;
         this.importDestination = importDestination;
         this.desiredMargin = desiredMargin;
+        this.marketHistoryService = marketHistoryService;
     }
 
     public List<ImportSuggestion> getImportSuggestions(){
         Map<Item, List<MarketOrder>> destinationMarketOrdersForAllItems = marketSellOrderService.getMultipleItemOrders(importDestination, interestingItems);
         Map<Item, Double> item5PercentBuyPrice = marketBuyPriceService.getItem5PercentBuyPrice(interestingItems, importSource);
+        Map<Item, Double> itemVolumeHistoryInDestination = marketHistoryService.getAverageNumberOfSalesInPast7Days(item5PercentBuyPrice.keySet(), importDestination);
 
+        return buildImportSuggestions(destinationMarketOrdersForAllItems, item5PercentBuyPrice, itemVolumeHistoryInDestination);
+    }
+
+    private List<ImportSuggestion> buildImportSuggestions(Map<Item, List<MarketOrder>> destinationMarketOrdersForAllItems,
+                                                          Map<Item, Double> item5PercentBuyPrice,
+                                                          Map<Item, Double> itemVolumeHistoryInDestination) {
         List<ImportSuggestion> importSuggestions = new ArrayList<>();
         for (Item item : item5PercentBuyPrice.keySet()) {
 
             // Item
             ImportSuggestion importSuggestion = new ImportSuggestion();
             importSuggestion.setItem(item);
+            importSuggestion.setNumberSoldInDestinationPerDay(itemVolumeHistoryInDestination.get(item));
 
             // TODO item destroyed
 
