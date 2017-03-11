@@ -55,7 +55,6 @@ public class MarketSellOrderService {
         Map<Item, List<MarketOrder>> marketOrders = items.parallelStream()
                 .map(item -> getItemOrders(importLocation, item))
                 .flatMap(marketOrdersList -> marketOrdersList.stream())
-                //.collect(Collectors.groupingBy(MarketOrder::getType_id));
                 .collect(Collectors.groupingBy(marketOrder -> itemService.getItemById(marketOrder.getType_id()).get()));
         logger.info("Got " + marketOrders.size() + " market orders");
         return marketOrders;

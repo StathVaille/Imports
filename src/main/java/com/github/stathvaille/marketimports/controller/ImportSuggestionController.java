@@ -4,6 +4,7 @@ import com.github.stathvaille.marketimports.domain.ImportSuggestion;
 import com.github.stathvaille.marketimports.domain.esi.MarketOrder;
 import com.github.stathvaille.marketimports.domain.location.ImportLocation;
 import com.github.stathvaille.marketimports.domain.staticdataexport.Item;
+import com.github.stathvaille.marketimports.service.ImportSuggestionService;
 import com.github.stathvaille.marketimports.service.MarketBuyPriceService;
 import com.github.stathvaille.marketimports.service.MarketSellOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,29 +25,14 @@ import java.util.Map;
 @RequestMapping("/api/import")
 public class ImportSuggestionController {
 
-    @NotNull
-    public final List<Item> interestingItems;
-    private final MarketSellOrderService marketSellOrderService;
-    private final MarketBuyPriceService marketBuyPriceService;
-    private final ImportLocation importSource;
-    private final ImportLocation importDestination;
+    private final ImportSuggestionService importSuggestionService;
 
-    public ImportSuggestionController(@Autowired @Qualifier("interestingItems") List<Item> interestingItems,
-                                      MarketSellOrderService marketSellOrderService,
-                                      MarketBuyPriceService marketBuyPriceService,
-                                      @Autowired @Qualifier("importSource") ImportLocation importSource,
-                                      @Autowired @Qualifier("importDestination") ImportLocation importDestination) {
-        this.interestingItems = interestingItems;
-        this.marketSellOrderService = marketSellOrderService;
-        this.marketBuyPriceService = marketBuyPriceService;
-        this.importSource = importSource;
-        this.importDestination = importDestination;
+    public ImportSuggestionController(ImportSuggestionService importSuggestionService){
+        this.importSuggestionService = importSuggestionService;
     }
 
     @GetMapping
     public List<ImportSuggestion> getImportSuggestions(){
-        Map<Item, List<MarketOrder>> destinationMarketOrders = marketSellOrderService.getMultipleItemOrders(importDestination, interestingItems);
-        Map<Item, Long> item5PercentBuyPrice = marketBuyPriceService.getItem5PercentBuyPrice(interestingItems);
-        return new ArrayList<>();
+        return importSuggestionService.getImportSuggestions();
     }
 }
