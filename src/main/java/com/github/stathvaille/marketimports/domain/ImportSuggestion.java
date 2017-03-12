@@ -12,13 +12,12 @@ public class ImportSuggestion {
     long totalIskLost;
     long itemsLostInDestination;
 
-    Double minPriceInDestination;
+    double minPriceInSource;
+    double minPriceInDestination;
     long volRemainingInDestination;
     int distinctMarketOrdersInDestination;
 
     double numberSoldInDestinationPerDay;
-
-    Double minPriceInSource;
 
     ImportLocation importSource;
     ImportLocation importDestination;

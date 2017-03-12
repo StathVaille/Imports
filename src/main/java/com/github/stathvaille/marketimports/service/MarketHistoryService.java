@@ -20,7 +20,7 @@ public class MarketHistoryService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public Double getAverageNumberOfSalesInPast7Days(Item item, ImportLocation importLocation){
-        logger.info("Calculating volume of " + item.getName() + " + sold in the last 7 days in " + importLocation.getRegionName());
+        logger.info("Calculating volume of " + item.getName() + " sold in the last 7 days in " + importLocation.getRegionName());
         RestTemplate restTemplate = new RestTemplate();
         String url = String.format(apiTemplate, importLocation.getRegionId(), item.getTypeId());
         Map[] itemHistoryArray = restTemplate.getForObject(url, HashMap[].class);

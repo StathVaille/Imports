@@ -42,6 +42,7 @@ public class ImportSuggestionService {
     }
 
     public List<ImportSuggestion> getImportSuggestions(){
+        // TODO use Async to run these in parallel
         Map<Item, List<MarketOrder>> destinationMarketOrdersForAllItems = marketSellOrderService.getMultipleItemOrders(importDestination, interestingItems);
         Map<Item, Double> item5PercentBuyPrice = marketBuyPriceService.getItem5PercentBuyPrice(interestingItems, importSource);
         Map<Item, Double> itemVolumeHistoryInDestination = marketHistoryService.getAverageNumberOfSalesInPast7Days(item5PercentBuyPrice.keySet(), importDestination);
