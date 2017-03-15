@@ -1,0 +1,272 @@
+Ammo,
+Barrage M,12773
+Barrage S,12625
+Caldari Navy Antimatter Charge M,23025
+Caldari Navy Inferno Light Missile,27371
+Caldari Navy Mjolnir Light Missile,27387
+Caldari Navy Nova Light Missile,27381
+Caldari Navy Scourge Light Missile,27361
+Caldari Navy Thorium Charge M,23031
+Hail L,12779
+Hail M,12777
+Hail S,12608
+Inferno Fury Light Missile,24499
+Javelin L,12803
+Javelin M,12801
+Javelin M,12801
+Javelin S,12620
+Javelin S,12620
+Mjolnir Fury Light Missile,2613
+Navy Cap Booster 100,31982
+Navy Cap Booster 150,31990
+Navy Cap Booster 150,31990
+Navy Cap Booster 25,33330
+Navy Cap Booster 400,32006
+Navy Cap Booster 50,33332
+Navy Cap Booster 75,33334
+Navy Cap Booster 800,32014
+Nova Fury Light Missile,24497
+Null L,12787
+Null M,12785
+Null S,12614
+Scourge Fury Light Missile,24495
+Spike L,12807
+Spike M,12805
+Spike M,12805
+Spike S,12618
+Void L,12791
+Void M,12789
+Nanite Repair Paste,28668
+Void S,12612
+Sisters Core Scanner Probe,30488
+Sisters Combat Scanner Probe,30486
+Caldari Navy Scourge Heavy Missile,27441
+Caldari Navy Nova Heavy Missile,27453
+Caldari Navy Mjolnir Heavy Missile,27435
+Caldari Navy Inferno Heavy Missile,27447
+Liquid Ozone,16273
+,
+Drones,
+Acolyte II,2205
+Hobgoblin II,2456
+Hornet II,2466
+Warrior II,2488
+Hammerhead II,2185
+Infiltrator II,2175
+Valkyrie II,21640
+Vespa II,21638
+Praetor II,2195
+Berserker II,2478
+Ogre II,2446
+Wasp II,2436
+Heavy Armor Maintenance Bot II,28197
+Heavy Shield Maintenance Bot II,28199
+Imperial Navy Praetor,31870
+Medium Armor Maintenance Bot II,28205
+Medium Shield Maintenance Bot II,28207
+Bouncer II,28215
+Garde II,28211
+Curator II,28213
+Warden II,28209
+Caldari Navy Wasp,31876
+,
+Guns,
+125mm Gatling AutoCannon II,2873
+125mm Railgun II,10680
+150mm Railgun II,3074
+150mm Light AutoCannon II,2881
+200mm AutoCannon II,2889
+220mm Vulcan AutoCannon II,2897
+200mm Railgun II,12346
+250mm Railgun II,3082
+280mm Howitzer Artillery II,2977
+425mm Railgun II,3090
+425mm AutoCannon II,2913
+ECM - Ion Field Projector II,2563
+ECM - Phase Inverter II,2559
+ECM - Spatial Destabilizer II,2571
+ECM - White Noise Generator II,2575
+Focused Medium Pulse Laser II,3512
+Heavy Assault Missile Launcher II,25715
+Heavy Electron Blaster II,3130
+Heavy Ion Blaster II,3138
+Heavy Neutron Blaster II,3146
+Heavy Pulse Laser II,3520
+Light Ion Blaster II,3170
+Medium Nosferatu II,12259
+Rocket Launcher II,10631
+Small Nosferatu II,13001
+Stasis Webifier II,527
+Torpedo Launcher II,2420
+Large S95a Remote Shield Booster,8641
+Covert Ops Cloaking Device II,11578
+Interdiction Sphere Launcher I,22782
+Heavy Missile Launcher II,2410
+425mm Medium Prototype Automatic Cannon,9141
+425mm Medium 'Scout' Autocannon I,9135
+425mm Prototype Gauss Gun,7447
+Heavy Unstable Power Fluctuator I,16479
+720mm 'Scout' Artillery I,9451
+720mm Howitzer Artillery II,2969
+Heavy Beam Laser II,3025
+,
+Equipment,
+100MN Afterburner II,12068
+Adaptive Invulnerability Field II,2281
+Armor Explosive Hardener II,11646
+Armor Kinetic Hardener II,11644
+Armor Thermic Hardener II,11648
+Armor EM Hardener II,11642
+Capacitor Flux Coil II,1248
+Capacitor Power Relay II,1447
+Damage Control II,2048
+EM Ward Amplifier II,2553
+EM Ward Field II,2301
+Expanded Cargohold II,1319
+Large Armor Repairer II,3540
+Large Remote Armor Repairer II,26914
+Large Shield Extender II,3841
+Magnetic Field Stabilizer II,10190
+Medium Armor Repairer II,3530
+Medium Capacitor Booster II,2024
+Medium Shield Booster II,10850
+Medium Shield Extender II,3831
+Overdrive Injector System II,1236
+Power Diagnostic System II,1541
+Shield Boost Amplifier II,24443
+Shield Power Relay II,1422
+Shield Recharger II,394
+Signal Amplifier II,1987
+Signal Distortion Amplifier II,25563
+Small Armor Repairer II,1183
+Small Shield Booster II,400
+Small Shield Extender II,380
+Target Painter II,19806
+Thermic Dissipation Amplifier II,2539
+Thermic Dissipation Field II,2303
+10MN Afterburner II,12058
+Warp Disruptor II,3244
+Warp Scrambler II,448
+Cynosural Field Generator I,21096
+Small Electrochemical Capacitor Booster I,5011
+Energized Adaptive Nano Membrane II,11269
+Small Ancillary Armor Repairer,33076
+Rocket Launcher II,10631
+Light Electron Blaster II,3162
+Medium Ancillary Shield Booster,32772
+Medium F-S9 Regolith Shield Induction,8517
+Drone Damage Amplifier II,4405
+Sisters Core Probe Launcher,28758
+Sisters Expanded Probe Launcher,28756
+Tracking Enhancer II,1999
+Drone Link Augmentor I,23527
+Heavy Electrochemical Capacitor Booster I,5051
+Large Micro Jump Drive,4383
+Omnidirectional Tracking Link II,24438
+1600mm Reinforced Steel Plates II,20353
+F-90 Positional Sensor Subroutines,6160
+Upgraded EM Ward Amplifier I,9580
+Pseudoelectron Containment Field I,5837
+co-processor II,3888
+,
+Rigs,
+Large Anti-EM Screen Reinforcer I,26076
+Large Capacitor Control Circuit I,25948
+Large Core Defense Field Extender I,26088
+Large Trimark Armor Pump I,25894
+Medium Anti-EM Screen Reinforcer I,31718
+Medium Anti-Thermal Screen Reinforcer I,31754
+Medium Auxiliary Nano Pump I,31047
+Medium Auxiliary Thrusters I,31107
+Medium Capacitor Control Circuit I,31372
+Medium Cargohold Optimization I,31119
+Medium Core Defense Field Extender I,31790
+Medium Core Defense Field Purger I,31802
+Medium Gravity Capacitor Upgrade I,31215
+Medium Particle Dispersion Augmentor I,31288
+Medium Polycarbon Engine Housing I,31179
+Medium Salvage Tackle I,31085
+Small Anti-EM Screen Reinforcer I,31716
+Small Anti-Explosive Pump I,31009
+Small Anti-Thermal Screen Reinforcer I,31752
+Small Auxiliary Thrusters I,31105
+Small Bay Loading Accelerator I,31586
+Small Capacitor Control Circuit I,31370
+Small Cargohold Optimization I,31117
+Small Core Defense Field Extender I,31788
+Small Gravity Capacitor Upgrade I,31213
+Small Hybrid Burst Aerator I,31526
+Small Low Friction Nozzle Joints I,31153
+Small Polycarbon Engine Housing I,31177
+Small Projectile Ambit Extension I,31656
+Small Projectile Burst Aerator I,31668
+Small Projectile Collision Accelerator I,31680
+Small Targeting System Subcontroller I,31322
+Small Warhead Calefaction Catalyst I,31620
+Medium Ancillary Current Router I,31360
+Small Auxiliary Nano Pump I,31045
+Small Inverted Signal Field Projector I,31262
+Small Hybrid Locus Coordinator I,31562
+Small Ancillary Current Router I,31358
+Medium Hydraulic Bay Thrusters I,31600
+Medium Rocket Fuel Cache Partition I,31610
+Small Emission Scope Sharpener I,31201
+Small Salvage Tackle I,31083
+Faint Epsilon Warp Scrambler I,5443
+Experimental 10MN Microwarpdrive I,5975
+Experimental 10MN Afterburner I,6005
+Medium Azeotropic Ward Salubrity I,8433
+Small Particle Dispersion Projector I,31298
+Small Ionic Field Projector I,31274
+,
+Other,
+Mobile Large Warp Disruptor I,12200
+Mobile Large Warp Disruptor II,26888
+Mobile Medium Warp Disruptor I,12199
+Mobile Medium Warp Disruptor II,26890
+Mobile Small Warp Disruptor I,12198
+Nanite Repair Paste,28668
+Mobile Tractor Unit,33475
+Helium Isotopes,16274
+Hydrogen Isotopes,17889
+Nitrogen Isotopes,17888
+Oxygen Isotopes,17887
+,
+Ships,
+Moa,623
+Caracal,621
+Eagle,12011
+Raptor,11178
+Malediction,11186
+Scythe,631
+Scimitar,11978
+Sabre,22456
+Flycatcher,22464
+Harpy,11381
+Ares,11202
+Taranis,11200
+Daredevil,17928
+Vexor,626
+Kestrel,602
+Tristan,593
+Talwar,32878
+Cormorant,16238
+Merlin,603
+Burst,599
+Atron,608
+Condor,583
+Maulus,609
+Crucifier,2161
+Vigil,3766
+griffin,584
+Nemesis,11377
+Purifier,12038
+Manticore,12032
+Hound,12034
+Svipul,34562
+Jackdaw,34828
+Confessor,34317
+Hecate,35683
+Hurricane,24702
+Augoror Navy Issue,29337
+Vexor navy issue,17843

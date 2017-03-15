@@ -12,6 +12,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ForkJoinPool;
 
 /**
  * Generates the cost for a 5% market buy out of an item.
@@ -37,11 +39,22 @@ public class MarketBuyPriceService {
         return itemFivePercentPrice;
     }
 
-    public Map<Item, Double> getItem5PercentBuyPrice(List<Item> items, ImportLocation location){
+    public Map<Item, Double> getItem5PercentBuyPrice(List<Item> items, ImportLocation location) {
         Map<Item, Double> itemBuyPrices = new HashMap<>();
-        items.parallelStream().forEach(item ->
-            itemBuyPrices.put(item, getItem5PercentBuyPrice(item, location))
-        );
+
+        try {
+            ForkJoinPool forkJoinPool = new ForkJoinPool(50);
+            forkJoinPool.submit(() ->
+                    items.parallelStream().forEach(item ->
+                            itemBuyPrices.put(item, getItem5PercentBuyPrice(item, location))
+                    )
+            ).get();
+        }
+        catch (ExecutionException | InterruptedException e ){
+            throw new RuntimeException("Error getting market buy price", e);
+        }
+
+
         return itemBuyPrices;
     }
 }

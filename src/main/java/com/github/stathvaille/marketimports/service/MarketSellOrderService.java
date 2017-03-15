@@ -11,6 +11,8 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ForkJoinPool;
 import java.util.stream.Collectors;
 
 /**
@@ -52,12 +54,23 @@ public class MarketSellOrderService {
      */
     public Map<Item, List<MarketOrder>> getMultipleItemOrders(ImportLocation importLocation, List<Item> items){
         logger.info(String.format("Getting market orders at %s for %d distinct types", importLocation.getStationName(), items.size()));
-        Map<Item, List<MarketOrder>> marketOrders = items.parallelStream()
-                .map(item -> getItemOrders(importLocation, item))
-                .flatMap(marketOrdersList -> marketOrdersList.stream())
-                .collect(Collectors.groupingBy(marketOrder -> itemService.getItemById(marketOrder.getType_id()).get()));
-        logger.info("Got " + marketOrders.size() + " market orders");
-        return marketOrders;
+
+        try {
+            ForkJoinPool forkJoinPool = new ForkJoinPool(50);
+            Map<Item, List<MarketOrder>> marketOrders = forkJoinPool.submit(() ->
+                    items.parallelStream()
+                        .map(item -> getItemOrders(importLocation, item))
+                        .flatMap(marketOrdersList -> marketOrdersList.stream())
+                        .collect(Collectors.groupingBy(marketOrder -> itemService.getItemById(marketOrder.getType_id()).get()))
+            ).get();
+            logger.info("Got " + marketOrders.size() + " market orders");
+            return marketOrders;
+        }
+        catch (ExecutionException | InterruptedException e ){
+            throw new RuntimeException("Error getting market buy price", e);
+        }
+
+
     }
 
     private List<MarketOrder> filterToStation(List<MarketOrder> marketOrders, long stationId) {
