@@ -5,13 +5,10 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Item {
-    private long typeId;
-    private int graphicID;
+public class Group {
     private long groupID;
-    private LocalisedString description;
+    private int iconID;
     private LocalisedString name;
-    private double volume;
 
     @Override
     public String toString(){
