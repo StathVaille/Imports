@@ -56,7 +56,7 @@ public class MarketSellOrderService {
         logger.info(String.format("Getting market orders at %s for %d distinct types", importLocation.getStationName(), items.size()));
 
         try {
-            ForkJoinPool forkJoinPool = new ForkJoinPool(50);
+            ForkJoinPool forkJoinPool = new ForkJoinPool(30);
             Map<Item, List<MarketOrder>> marketOrders = forkJoinPool.submit(() ->
                     items.parallelStream()
                         .map(item -> getItemOrders(importLocation, item))
