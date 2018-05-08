@@ -25,13 +25,8 @@ import java.util.Map;
 public class MultiPageESIRequest<T> {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final RestTemplate restTemplate;
 
-    public MultiPageESIRequest() {
-        restTemplate = new RestTemplate();
-    }
-
-    public List<T> makeESICall(URI uri, ParameterizedTypeReference esiObjectType){
+    public List<T> makeESICall(URI uri, ParameterizedTypeReference esiObjectType, RestTemplate restTemplate){
         try{
             // First get headers to figure out how many pages there are
             HttpHeaders responseHeader = restTemplate.headForHeaders(uri);
@@ -40,7 +35,7 @@ public class MultiPageESIRequest<T> {
 
             List<T> allResults = new ArrayList<T>();
             for (int page = 1; page <= numberOfPages; page++){
-                allResults.addAll(getForPage(page, uri, esiObjectType));
+                allResults.addAll(getForPage(page, uri, esiObjectType, restTemplate));
             }
 
             return allResults;
@@ -51,7 +46,7 @@ public class MultiPageESIRequest<T> {
         }
     }
 
-    private List<T> getForPage(int pageNumber, URI uri, ParameterizedTypeReference esiObjectType){
+    private List<T> getForPage(int pageNumber, URI uri, ParameterizedTypeReference esiObjectType, RestTemplate restTemplate){
         URI pageUri = UriComponentsBuilder.fromUri(uri).queryParam("page", pageNumber).build().toUri();
         logger.info(String.format("Getting page %d at endpoint: %s", pageNumber, pageUri.toString()));
         MultiValueMap<String, String> requestHeaders = new HttpHeaders();

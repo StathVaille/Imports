@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -26,6 +27,8 @@ public class MarketBuyPriceService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final MultiPageESIRequest<MarketOrder> multiPageESIRequest;
+
+    private final RestTemplate restTemplate = new RestTemplate();
 
     public MarketBuyPriceService(){
         multiPageESIRequest = new MultiPageESIRequest<>();
@@ -65,7 +68,7 @@ public class MarketBuyPriceService {
 
         logger.info("Retrieving all sell orders in region: " + location.getRegionName());
         ParameterizedTypeReference esiObjectType = new ParameterizedTypeReference<List<MarketOrder>>() {};
-        List<MarketOrder> marketOrders = multiPageESIRequest.makeESICall(uriComponents.toUri(), esiObjectType);
+        List<MarketOrder> marketOrders = multiPageESIRequest.makeESICall(uriComponents.toUri(), esiObjectType, restTemplate);
         logger.info("Found " + marketOrders.size() + " market orders in " + location.getRegionName());
 
         List<MarketOrder> stationMarketOrders = marketOrders.stream()

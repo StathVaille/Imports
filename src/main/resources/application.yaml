@@ -20,12 +20,46 @@ importSource:
   stationId: 60008494
   stationName: "Amarr VIII (Oris) - Emperor Family Academy"
 
+# This is a structure so needs to use the structure API
 importDestination:
   regionId: 10000014
   regionName: "Catch"
   systemId: 30001198
   systemName: "GE-8JV"
-  stationId: 61000182
-  stationName: "GE-8JV"
+  stationId: 1023729674815
+  stationName: "BROADCAST FOR REPS"
 
 # Fort structure Id: 1023729674815
+
+# Reverse forward for the redirect to work
+# From PC: ssh -R 0.0.0.0:8000:localhost:8000 stath@stath.online
+# That will listen on stat.online on port 8000 and forward all traffic to the PC at port 8000
+#
+# Test:
+#   Listen on port 8000 on the PC with:   nc -lv 0.0.0.0 8000
+#   Send traffic through stath.online with:  nc -v stath.online 8000
+
+uris:
+  login: /login/eve
+
+eve:
+  client:
+    clientId: 17dc42c7273a45b28c1f3cb3d7989d7b
+    clientSecret: iGL0AQANcEtTEfQnJ285tCi6elpDFsdjzUvTluhZ
+    accessTokenUri: https://login.eveonline.com/oauth/token
+    userAuthorizationUri: https://login.eveonline.com/oauth/authorize
+    scope: esi-markets.structure_markets.v1
+    tokenName: oauth_token
+    authenticationScheme: query
+    clientAuthenticationScheme: form
+  resource:
+    userInfoUri: https://login.eveonline.com/oauth/verify
+
+logging:
+  level:
+    org.springframework.security: INFO
+
+spring:
+  resources:
+    chain:
+      enabled: true
