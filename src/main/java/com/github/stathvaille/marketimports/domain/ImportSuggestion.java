@@ -13,6 +13,7 @@ public class ImportSuggestion {
     long itemsLostInDestination;
 
     double minPriceInSource;
+    long numOnSaleAtCheapestPriceInSource;
     double minPriceInDestination;
     long volRemainingInDestination;
     int distinctMarketOrdersInDestination;

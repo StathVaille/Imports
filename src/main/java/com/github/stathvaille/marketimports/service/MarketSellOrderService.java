@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 /**
  * Returns lists of items currently on the market in sell orders
+ * e.g. https://esi.tech.ccp.is/latest/markets/10000014/orders/?datasource=tranquility&order_type=sell&page=1&type_id=2185
  */
 @Service
 public class MarketSellOrderService {
@@ -37,9 +38,9 @@ public class MarketSellOrderService {
         MarketOrder[] marketOrderArray = restTemplate.getForObject(url, MarketOrder[].class);
 
         List<MarketOrder> marketOrders = Arrays.asList(marketOrderArray);
-        logger.info(String.format("Retrieved %d market orders for %s in region %s", marketOrders.size(),
-                                                                                            item.getName().getEn(),
-                                                                                            importLocation.getRegionName()));
+        logger.info(String.format("Retrieved %d market orders for '%s' in region %s", marketOrders.size(),
+                                                                                    item.getName().getEn(),
+                                                                                    importLocation.getRegionName()));
 
         marketOrders = filterToStation(marketOrders, importLocation.getStationId());
         logger.info(String.format("Filtered market orders down to %d in station %s", marketOrders.size(), importLocation.getStationName()));

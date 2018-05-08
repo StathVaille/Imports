@@ -5,63 +5,74 @@ import com.github.stathvaille.marketimports.domain.location.ImportLocation;
 import com.github.stathvaille.marketimports.domain.staticdataexport.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ForkJoinPool;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
- * Generates the cost for a 5% market buy out of an item.
+ * Calculate the minimum sell price for an item at a location
  *
- * Exmaple URL: http://api.eve-central.com/api/marketstat/json?typeid=28211&usesystem=30002187
+ * Example URL: https://esi.evetech.net/latest/markets/10000043/orders/?datasource=tranquility&order_type=sell&page=2
  */
 @Service
 public class MarketBuyPriceService {
-
-    private final static String apiTemplate = "http://api.eve-central.com/api/marketstat/json?typeid=%s&usesystem=30002187";
-
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public Double getItem5PercentBuyPrice(Item item, ImportLocation location){
-        logger.info("Calculating a 5% buy price for " + item.getName() + " in " + location.getSystemName());
+    private final MultiPageESIRequest<MarketOrder> multiPageESIRequest;
 
-        try{
-            RestTemplate restTemplate = new RestTemplate();
-            String url = String.format(apiTemplate, item.getTypeId(), location.getSystemId());
-            Map[] itemBuyPrices = restTemplate.getForObject(url, HashMap[].class);
-            Map itemBuyPricesMap = itemBuyPrices [0];
-            Map itemSellPricesMap = (Map) itemBuyPricesMap.get("sell");
-            Double itemFivePercentPrice = (Double) itemSellPricesMap.get("fivePercent");
-            return itemFivePercentPrice;
-        }
-        catch (HttpClientErrorException e){
-            logger.error("Error calling API getting sell orders for " + item + ". No data will be returned", e.getMessage());
-            return 0.0;
-        }
+    public MarketBuyPriceService(){
+        multiPageESIRequest = new MultiPageESIRequest<>();
     }
 
-    public Map<Item, Double> getItem5PercentBuyPrice(List<Item> items, ImportLocation location) {
-        Map<Item, Double> itemBuyPrices = new HashMap<>();
+    public Map<Item, Optional<MarketOrder>> getMinSalesPrices(List<Item> items, ImportLocation location) {
+        List<MarketOrder> stationMarketOrders = getAllSellOrdersAtStation(location);
 
-        try {
-            ForkJoinPool forkJoinPool = new ForkJoinPool(30);
-            forkJoinPool.submit(() ->
-                    items.parallelStream().forEach(item ->
-                            itemBuyPrices.put(item, getItem5PercentBuyPrice(item, location))
-                    )
-            ).get();
-        }
-        catch (ExecutionException | InterruptedException e ){
-            throw new RuntimeException("Error getting market buy price", e);
-        }
-
-
+        Map<Item, Optional<MarketOrder>> itemBuyPrices = new HashMap<>();
+        items.stream().forEach(item -> itemBuyPrices.put(item, getMinSalesPrices(item, location, stationMarketOrders)));
         return itemBuyPrices;
+    }
+
+    private Optional<MarketOrder> getMinSalesPrices(Item item, ImportLocation location, List<MarketOrder> stationMarketOrders) {
+        Optional<MarketOrder> cheapestMarketOrder =  stationMarketOrders.stream().filter(marketOrder -> marketOrder.getType_id() == item.getTypeId())
+                                                                        .min((i1, i2) -> Double.compare(i1.getPrice(), i2.getPrice()));
+
+        if (!cheapestMarketOrder.isPresent()) {
+            logger.warn("Could not find any sell orders for item " + item.getName() + "in location " + location);
+        }
+        return cheapestMarketOrder;
+    }
+
+    private List<MarketOrder> getAllSellOrdersAtStation(ImportLocation location){
+        Map<String, String> templateParams = new HashMap<>();
+        templateParams.put("region_id", Long.toString(location.getRegionId()));
+        UriComponents uriComponents =
+                UriComponentsBuilder.newInstance()
+                        .scheme("https")
+                        .host("esi.evetech.net")
+                        .path("/latest/markets/{region_id}/orders/")
+                        .queryParam("datasource", "tranquility")
+                        .queryParam("order_type", "sell")
+                        .build()
+                        .expand(templateParams)
+                        .encode();
+
+        logger.info("Retrieving all sell orders in region: " + location.getRegionName());
+        ParameterizedTypeReference esiObjectType = new ParameterizedTypeReference<List<MarketOrder>>() {};
+        List<MarketOrder> marketOrders = multiPageESIRequest.makeESICall(uriComponents.toUri(), esiObjectType);
+        logger.info("Found " + marketOrders.size() + " market orders in " + location.getRegionName());
+
+        List<MarketOrder> stationMarketOrders = marketOrders.stream()
+                                                   .filter(marketOrder -> marketOrder.getLocation_id() == location.getStationId())
+                                                   .collect(Collectors.toList());
+
+        logger.info("Filtered down to " + stationMarketOrders.size() + " sell orders in station " + location.getStationName());
+        return stationMarketOrders;
     }
 }

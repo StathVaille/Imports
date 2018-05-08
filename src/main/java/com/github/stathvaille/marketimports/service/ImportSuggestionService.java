@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class ImportSuggestionService {
@@ -44,27 +45,35 @@ public class ImportSuggestionService {
     public List<ImportSuggestion> getImportSuggestions(){
         // TODO use Async to run these in parallel
         Map<Item, List<MarketOrder>> destinationMarketOrdersForAllItems = marketSellOrderService.getMultipleItemOrders(importDestination, interestingItems);
-        Map<Item, Double> item5PercentBuyPrice = marketBuyPriceService.getItem5PercentBuyPrice(interestingItems, importSource);
-        Map<Item, Double> itemVolumeHistoryInDestination = marketHistoryService.getAverageNumberOfSalesInPast7Days(item5PercentBuyPrice.keySet(), importDestination);
+        Map<Item, Optional<MarketOrder>> itemsMinSellPrice = marketBuyPriceService.getMinSalesPrices(interestingItems, importSource);
+        Map<Item, Double> itemVolumeHistoryInDestination = marketHistoryService.getAverageNumberOfSalesInPast7Days(itemsMinSellPrice.keySet(), importDestination);
 
-        return buildImportSuggestions(destinationMarketOrdersForAllItems, item5PercentBuyPrice, itemVolumeHistoryInDestination);
+        return buildImportSuggestions(destinationMarketOrdersForAllItems, itemsMinSellPrice, itemVolumeHistoryInDestination);
     }
 
     private List<ImportSuggestion> buildImportSuggestions(Map<Item, List<MarketOrder>> destinationMarketOrdersForAllItems,
-                                                          Map<Item, Double> item5PercentBuyPrice,
+                                                          Map<Item, Optional<MarketOrder>> cheapestSellOrder,
                                                           Map<Item, Double> itemVolumeHistoryInDestination) {
         List<ImportSuggestion> importSuggestions = new ArrayList<>();
-        for (Item item : item5PercentBuyPrice.keySet()) {
+        for (Item item : cheapestSellOrder.keySet()) {
 
             // Item
             ImportSuggestion importSuggestion = new ImportSuggestion();
             importSuggestion.setItem(item);
             importSuggestion.setNumberSoldInDestinationPerDay(itemVolumeHistoryInDestination.get(item));
 
-            // TODO item destroyed
+            // TODO items destroyed
 
             // Source Prices
-            importSuggestion.setMinPriceInSource(item5PercentBuyPrice.get(item));
+            Optional<MarketOrder> cheapestMarketOrder = cheapestSellOrder.get(item);
+            if (cheapestMarketOrder.isPresent()) {
+                importSuggestion.setMinPriceInSource(cheapestMarketOrder.get().getPrice());
+                importSuggestion.setNumOnSaleAtCheapestPriceInSource(cheapestMarketOrder.get().getVolume_total());
+            }
+            else {
+                importSuggestion.setMinPriceInSource(Double.MAX_VALUE);
+                importSuggestion.setNumOnSaleAtCheapestPriceInSource(0);
+            }
 
             // Destination Prices
             List<MarketOrder> destinationMarketOrders = destinationMarketOrdersForAllItems.get(item);
@@ -97,7 +106,8 @@ public class ImportSuggestionService {
     }
 
     private void calculateImportPricesForItemNotInDesignation(ImportSuggestion importSuggestion) {
-        importSuggestion.setMinPriceInDestination(importSuggestion.getMinPriceInSource() * desiredMargin);
+        double markedUpPrice = Math.round(importSuggestion.getMinPriceInSource() * desiredMargin);
+        importSuggestion.setMinPriceInDestination(markedUpPrice);
         importSuggestion.setVolRemainingInDestination(0);
         importSuggestion.setDistinctMarketOrdersInDestination(0);
     }
