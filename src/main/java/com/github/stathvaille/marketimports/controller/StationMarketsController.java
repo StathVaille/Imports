@@ -8,46 +8,33 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.security.oauth2.client.OAuth2ClientContext;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
-import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-public class StationMarketsController {
-
+public class StationMarketsController extends BaseESIController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final MultiPageESIRequest<MarketOrder> multiPageESIRequest = new MultiPageESIRequest<>();
 
-    private int characterId;
-
     @Autowired
-    private OAuth2ClientContext oauth2ClientContext;
+    private OAuth2AuthorizedClientService authorizedClientService;
 
     @Autowired @Qualifier("importDestination") ImportLocation importDestination;
 
-    @RequestMapping("/user")
-    public Map<String, Object> user(OAuth2Authentication authentication)
-    {
-        Map<String, Object> details = (Map<String, Object>)authentication.getUserAuthentication().getDetails();
-        characterId = (Integer)details.get("CharacterID");
-        return details;
-    }
-
     @RequestMapping("/api/stationOrders")
-    public List<MarketOrder> stationOrders()
+    public List<MarketOrder> stationOrders(OAuth2AuthenticationToken authentication)
     {
-        OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(new AuthorizationCodeResourceDetails(), oauth2ClientContext);
+        RestTemplate resttemplate = getOAuthRestTemplate(authentication);
 
         // Query market structures
         Map<String, String> templateParams = new HashMap<>();
@@ -64,7 +51,7 @@ public class StationMarketsController {
 
 
         ParameterizedTypeReference esiObjectType = new ParameterizedTypeReference<List<MarketOrder>>() {};
-        List<MarketOrder> marketOrders = multiPageESIRequest.makeESICall(uriComponents.toUri(), esiObjectType, restTemplate);
+        List<MarketOrder> marketOrders = multiPageESIRequest.makeESICall(uriComponents.toUri(), esiObjectType, resttemplate);
         // Remove buy orders
         marketOrders = marketOrders.stream().filter(order -> !order.is_buy_order()).collect(Collectors.toList());
 

@@ -1,11 +1,13 @@
 package com.github.stathvaille.marketimports.service;
 
+import com.github.stathvaille.marketimports.controller.BaseESIController;
 import com.github.stathvaille.marketimports.domain.esi.MarketOrder;
 import com.github.stathvaille.marketimports.domain.location.ImportLocation;
 import com.github.stathvaille.marketimports.domain.staticdataexport.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
@@ -23,19 +25,17 @@ import java.util.stream.Collectors;
  * Example URL: https://esi.evetech.net/latest/markets/10000043/orders/?datasource=tranquility&order_type=sell&page=2
  */
 @Service
-public class MarketBuyPriceService {
+public class MarketBuyPriceService extends BaseESIController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final MultiPageESIRequest<MarketOrder> multiPageESIRequest;
-
-    private final RestTemplate restTemplate = new RestTemplate();
 
     public MarketBuyPriceService(){
         multiPageESIRequest = new MultiPageESIRequest<>();
     }
 
-    public Map<Item, Optional<MarketOrder>> getMinSalesPrices(List<Item> items, ImportLocation location) {
-        List<MarketOrder> stationMarketOrders = getAllSellOrdersAtStation(location);
+    public Map<Item, Optional<MarketOrder>> getMinSalesPrices(List<Item> items, ImportLocation location, OAuth2AuthenticationToken authentication) {
+        List<MarketOrder> stationMarketOrders = getAllSellOrdersAtStation(location, authentication);
 
         Map<Item, Optional<MarketOrder>> itemBuyPrices = new HashMap<>();
         items.stream().forEach(item -> itemBuyPrices.put(item, getMinSalesPrices(item, location, stationMarketOrders)));
@@ -52,7 +52,7 @@ public class MarketBuyPriceService {
         return cheapestMarketOrder;
     }
 
-    private List<MarketOrder> getAllSellOrdersAtStation(ImportLocation location){
+    private List<MarketOrder> getAllSellOrdersAtStation(ImportLocation location, OAuth2AuthenticationToken authentication){
         Map<String, String> templateParams = new HashMap<>();
         templateParams.put("region_id", Long.toString(location.getRegionId()));
         UriComponents uriComponents =
@@ -68,6 +68,9 @@ public class MarketBuyPriceService {
 
         logger.info("Retrieving all sell orders in region: " + location.getRegionName());
         ParameterizedTypeReference esiObjectType = new ParameterizedTypeReference<List<MarketOrder>>() {};
+
+        RestTemplate restTemplate = getOAuthRestTemplate(authentication);
+
         List<MarketOrder> marketOrders = multiPageESIRequest.makeESICall(uriComponents.toUri(), esiObjectType, restTemplate);
         logger.info("Found " + marketOrders.size() + " market orders in " + location.getRegionName());
 

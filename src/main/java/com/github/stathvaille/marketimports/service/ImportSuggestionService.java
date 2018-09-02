@@ -1,11 +1,14 @@
 package com.github.stathvaille.marketimports.service;
 
+import com.github.stathvaille.marketimports.controller.BaseESIController;
 import com.github.stathvaille.marketimports.domain.ImportSuggestion;
 import com.github.stathvaille.marketimports.domain.esi.MarketOrder;
 import com.github.stathvaille.marketimports.domain.location.ImportLocation;
 import com.github.stathvaille.marketimports.domain.staticdataexport.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
@@ -42,11 +45,11 @@ public class ImportSuggestionService {
         this.marketHistoryService = marketHistoryService;
     }
 
-    public List<ImportSuggestion> getImportSuggestions(){
+    public List<ImportSuggestion> getImportSuggestions(OAuth2AuthenticationToken authentication){
         // TODO use Async to run these in parallel
-        Map<Item, List<MarketOrder>> destinationMarketOrdersForAllItems = marketSellOrderService.getMultipleItemOrders(importDestination, interestingItems);
-        Map<Item, Optional<MarketOrder>> itemsMinSellPrice = marketBuyPriceService.getMinSalesPrices(interestingItems, importSource);
-        Map<Item, Double> itemVolumeHistoryInDestination = marketHistoryService.getAverageNumberOfSalesInPast7Days(itemsMinSellPrice.keySet(), importDestination);
+        Map<Item, Optional<MarketOrder>> itemsMinSellPrice = marketBuyPriceService.getMinSalesPrices(interestingItems, importSource, authentication);
+        Map<Item, Double> itemVolumeHistoryInDestination = marketHistoryService.getAverageNumberOfSalesInPast7Days(itemsMinSellPrice.keySet(), importDestination, authentication);
+        Map<Item, List<MarketOrder>> destinationMarketOrdersForAllItems = marketSellOrderService.getMultipleItemOrders(importDestination, interestingItems, authentication);
 
         return buildImportSuggestions(destinationMarketOrdersForAllItems, itemsMinSellPrice, itemVolumeHistoryInDestination);
     }

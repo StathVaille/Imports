@@ -35,7 +35,7 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter-security")
 //	compile("org.springframework.security.oauth:spring-security-oauth2")
 	compile("org.springframework.security:spring-security-oauth2-client")   // Spring boot 2.0
-	compile("org.springframework.security:spring-security-oauth2-jose")     // Spring boot 2.0
+//	compile("org.springframework.security:spring-security-oauth2-jose")     // Spring boot 2.0
 
 //    compile("org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.0.RELEASE")
 

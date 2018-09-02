@@ -1,10 +1,13 @@
 package com.github.stathvaille.marketimports.service;
 
+import com.github.stathvaille.marketimports.controller.BaseESIController;
 import com.github.stathvaille.marketimports.domain.esi.MarketOrder;
 import com.github.stathvaille.marketimports.domain.location.ImportLocation;
 import com.github.stathvaille.marketimports.domain.staticdataexport.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -20,7 +23,7 @@ import java.util.stream.Collectors;
  * e.g. https://esi.tech.ccp.is/latest/markets/10000014/orders/?datasource=tranquility&order_type=sell&page=1&type_id=2185
  */
 @Service
-public class MarketSellOrderService {
+public class MarketSellOrderService extends BaseESIController {
 
 //    private static final String urlTemplate = "https://esi.tech.ccp.is/latest/markets/%s/orders/?datasource=tranquility&order_type=sell&page=1&type_id=%s";
     private static final String urlTemplate = "https://esi.evetech.net/latest/markets/structures/%s/?datasource=tranquility&page=1\n";
@@ -33,8 +36,10 @@ public class MarketSellOrderService {
     }
 
 
-    public List<MarketOrder> getItemOrders(ImportLocation importLocation, Item item){
-        RestTemplate restTemplate = new RestTemplate();
+    public List<MarketOrder> getItemOrders(ImportLocation importLocation, Item item, OAuth2AuthenticationToken authentication){
+        RestTemplate restTemplate = getOAuthRestTemplate(authentication);
+        //RestTemplate restTemplate = new RestTemplate();
+
         String url = String.format(urlTemplate, importLocation.getRegionId(), item.getTypeId());
         MarketOrder[] marketOrderArray = restTemplate.getForObject(url, MarketOrder[].class);
 
@@ -54,14 +59,14 @@ public class MarketSellOrderService {
      * @param importLocation The market to search sell orders for
      * @param items A list of items to search sell orders for
      */
-    public Map<Item, List<MarketOrder>> getMultipleItemOrders(ImportLocation importLocation, List<Item> items){
+    public Map<Item, List<MarketOrder>> getMultipleItemOrders(ImportLocation importLocation, List<Item> items, OAuth2AuthenticationToken authentication){
         logger.info(String.format("Getting market orders at %s for %d distinct types", importLocation.getStationName(), items.size()));
 
         try {
             ForkJoinPool forkJoinPool = new ForkJoinPool(30);
             Map<Item, List<MarketOrder>> marketOrders = forkJoinPool.submit(() ->
                     items.parallelStream()
-                        .map(item -> getItemOrders(importLocation, item))
+                        .map(item -> getItemOrders(importLocation, item, authentication))
                         .flatMap(marketOrdersList -> marketOrdersList.stream())
                         .collect(Collectors.groupingBy(marketOrder -> itemService.getItemById(marketOrder.getType_id()).get()))
             ).get();

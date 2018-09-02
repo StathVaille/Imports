@@ -5,6 +5,8 @@ import com.github.stathvaille.marketimports.domain.ResponseWrapper;
 import com.github.stathvaille.marketimports.service.ImportSuggestionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,9 +29,9 @@ public class ImportSuggestionController {
 
     @GetMapping
     @CrossOrigin
-    public ResponseWrapper<List<ImportSuggestion>> getImportSuggestions(){
+    public ResponseWrapper<List<ImportSuggestion>> getImportSuggestions(OAuth2AuthenticationToken authentication){
         logger.info("Calculating market import suggestions...");
-        List<ImportSuggestion> importSuggestions = importSuggestionService.getImportSuggestions();
+        List<ImportSuggestion> importSuggestions = importSuggestionService.getImportSuggestions(authentication);
         logger.info("Found " + importSuggestions.size() + " import suggestions.");
         return new ResponseWrapper(importSuggestions);
     }
