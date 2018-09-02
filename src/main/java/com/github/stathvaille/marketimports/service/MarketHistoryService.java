@@ -5,6 +5,7 @@ import com.github.stathvaille.marketimports.domain.staticdataexport.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.text.DateFormat;
@@ -29,25 +30,32 @@ public class MarketHistoryService {
     private final static DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
     public Double getAverageNumberOfSalesInPast7Days(Item item, ImportLocation importLocation){
-        logger.info("Calculating volume of " + item.getName() + " sold in the last 7 days in " + importLocation.getRegionName());
-        RestTemplate restTemplate = new RestTemplate();
-        String url = String.format(apiTemplate, importLocation.getRegionId(), item.getTypeId());
-        Map[] itemHistoryArray = restTemplate.getForObject(url, HashMap[].class);
-        List<Map> itemHistoryList = Arrays.asList(itemHistoryArray);
+        try{
+
+            RestTemplate restTemplate = new RestTemplate();
+            String url = String.format(apiTemplate, importLocation.getRegionId(), item.getTypeId());
+            Map[] itemHistoryArray = restTemplate.getForObject(url, HashMap[].class);
+            List<Map> itemHistoryList = Arrays.asList(itemHistoryArray);
 
 
-        LocalDate sevenDaysAgo = LocalDate.now().minusDays(8);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate sevenDaysAgo = LocalDate.now().minusDays(8);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        List<Map> last7ItemHistory = itemHistoryList.stream().filter(itemHistory ->  {
-            LocalDate historicDate = LocalDate.parse((String)itemHistory.get("date"), formatter);
-            return historicDate.isAfter(sevenDaysAgo);
-        }).collect(Collectors.toList());
+            List<Map> last7ItemHistory = itemHistoryList.stream().filter(itemHistory ->  {
+                LocalDate historicDate = LocalDate.parse((String)itemHistory.get("date"), formatter);
+                return historicDate.isAfter(sevenDaysAgo);
+            }).collect(Collectors.toList());
 
-        List<Integer> last7ItemVolumes = last7ItemHistory.stream().map(itemHistory -> (int) itemHistory.get("volume")).collect(Collectors.toList());
-        int totalSoldInLast7Days = last7ItemVolumes.stream().mapToInt(a -> a).sum();
-        double averageSoldInLast7Days = totalSoldInLast7Days / 7.0;
-        return averageSoldInLast7Days;
+            List<Integer> last7ItemVolumes = last7ItemHistory.stream().map(itemHistory -> (int) itemHistory.get("volume")).collect(Collectors.toList());
+            int totalSoldInLast7Days = last7ItemVolumes.stream().mapToInt(a -> a).sum();
+            double averageSoldInLast7Days = totalSoldInLast7Days / 7.0;
+            logger.info("Calculating number of " + item.getName() + " sold in the last 7 days at " + importLocation.getRegionName() + ": " + averageSoldInLast7Days);
+            return averageSoldInLast7Days;
+        }
+        catch (RestClientException e){
+            logger.error("Error getting market history for item " + item + ". No history will be returned", e.getMessage());
+            return 0.0;
+        }
     }
 
     public Map<Item, Double> getAverageNumberOfSalesInPast7Days(Collection<Item> items, ImportLocation importLocation){

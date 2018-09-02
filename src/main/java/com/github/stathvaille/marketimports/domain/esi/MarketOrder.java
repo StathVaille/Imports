@@ -12,7 +12,7 @@ public class MarketOrder {
     private long volume_total;
     private long volume_remain;
     private long min_volume;
-    private long price;
+    private double price;
     private boolean is_buy_order;
     private long duration;
     private Date issued;
