@@ -5,6 +5,11 @@ import com.github.stathvaille.marketimports.domain.location.ImportLocation;
 import com.github.stathvaille.marketimports.domain.staticdataexport.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -20,6 +25,7 @@ import java.util.concurrent.ForkJoinPool;
  * Generates the cost for a 5% market buy out of an item.
  *
  * Exmaple URL: http://api.eve-central.com/api/marketstat/json?typeid=28211&usesystem=30002187
+ * e.g. https://esi.tech.ccp.is/latest/markets/10000014/orders/?datasource=tranquility&order_type=sell&page=1&type_id=2185
  */
 @Service
 public class MarketBuyPriceService {
@@ -32,6 +38,8 @@ public class MarketBuyPriceService {
         logger.info("Calculating a 5% buy price for " + item.getName() + " in " + location.getSystemName());
 
         try{
+
+
             RestTemplate restTemplate = new RestTemplate();
             String url = String.format(apiTemplate, item.getTypeId(), location.getSystemId());
             Map[] itemBuyPrices = restTemplate.getForObject(url, HashMap[].class);

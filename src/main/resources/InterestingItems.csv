@@ -45,6 +45,13 @@ Caldari Navy Nova Heavy Missile,27453
 Caldari Navy Mjolnir Heavy Missile,27435
 Caldari Navy Inferno Heavy Missile,27447
 Liquid Ozone,16273
+Republic Fleet EMP M,21896
+Republic Fleet Fusion M,21904
+Republic Fleet Phased Plasma M,21922
+Republic Fleet Titanium Sabot M,21937
+Republic Fleet Depleted Uranium M,28334
+Tremor M,12771
+Quake M,12767
 ,
 Drones,
 Acolyte II,2205
@@ -166,16 +173,31 @@ Omnidirectional Tracking Link II,24438
 1600mm Reinforced Steel Plates II,20353
 F-90 Positional Sensor Subroutines,6160
 Upgraded EM Ward Amplifier I,9580
-Pseudoelectron Containment Field I,5837
 co-processor II,3888
+Faint Epsilon Warp Scrambler I,5443
+Experimental 10MN Microwarpdrive I,5975
+Experimental 10MN Afterburner I,6005
+Medium Azeotropic Ward Salubrity I,8433
+Gyrostabilizer II,519
+5MN Cold-Gas Enduring Microwarpdrive,5971
+5MN Digital Booster Microwarpdrive,21476
+5MN Quad LiF Restrained Microwarpdrive,35658
+5MN Microwarpdrive II,440
+50MN Cold-Gas Enduring Microwarpdrive,5975
+50MN Quad LiF Restrained Microwarpdrive,35660
+50MN Microwarpdrive II,12076
+Reactor Control Unit II,1355
 ,
 Rigs,
 Large Anti-EM Screen Reinforcer I,26076
 Large Capacitor Control Circuit I,25948
 Large Core Defense Field Extender I,26088
+Large Core Defense Field Extender II,26448
 Large Trimark Armor Pump I,25894
 Medium Anti-EM Screen Reinforcer I,31718
+Medium Anti-EM Screen Reinforcer II,31724
 Medium Anti-Thermal Screen Reinforcer I,31754
+Medium Anti-Thermal Screen Reinforcer II,31760
 Medium Auxiliary Nano Pump I,31047
 Medium Auxiliary Thrusters I,31107
 Medium Capacitor Control Circuit I,31372
@@ -187,6 +209,7 @@ Medium Particle Dispersion Augmentor I,31288
 Medium Polycarbon Engine Housing I,31179
 Medium Salvage Tackle I,31085
 Small Anti-EM Screen Reinforcer I,31716
+Small Anti-EM Screen Reinforcer II,31722
 Small Anti-Explosive Pump I,31009
 Small Anti-Thermal Screen Reinforcer I,31752
 Small Auxiliary Thrusters I,31105
@@ -194,6 +217,7 @@ Small Bay Loading Accelerator I,31586
 Small Capacitor Control Circuit I,31370
 Small Cargohold Optimization I,31117
 Small Core Defense Field Extender I,31788
+Small Core Defense Field Extender II,31794
 Small Gravity Capacitor Upgrade I,31213
 Small Hybrid Burst Aerator I,31526
 Small Low Friction Nozzle Joints I,31153
@@ -212,10 +236,6 @@ Medium Hydraulic Bay Thrusters I,31600
 Medium Rocket Fuel Cache Partition I,31610
 Small Emission Scope Sharpener I,31201
 Small Salvage Tackle I,31083
-Faint Epsilon Warp Scrambler I,5443
-Experimental 10MN Microwarpdrive I,5975
-Experimental 10MN Afterburner I,6005
-Medium Azeotropic Ward Salubrity I,8433
 Small Particle Dispersion Projector I,31298
 Small Ionic Field Projector I,31274
 ,
@@ -270,6 +290,18 @@ Hecate,35683
 Hurricane,24702
 Augoror Navy Issue,29337
 Vexor navy issue,17843
+Hugin,11961
+Lachesis,11971
+Stork,37482
+Bifrost,37480
+Pontifex,37481
+Magus,37483
+Garmur,33816
+Cynabal,17720
+Falcon,11957
+Omen Navy Issue,17709
+Osprey Navy Issue,29340
+Scythe Fleet Issue,29336
 ,
 Implants,
  Limited Neural Boost,13285
