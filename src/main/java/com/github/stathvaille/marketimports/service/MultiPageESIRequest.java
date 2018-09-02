@@ -35,7 +35,7 @@ public class MultiPageESIRequest<T> {
 
             List<T> allResults = new ArrayList<T>();
             for (int page = 1; page <= numberOfPages; page++){
-                allResults.addAll(getForPage(page, uri, esiObjectType, restTemplate));
+                allResults.addAll(getForPage(page, numberOfPages, uri, esiObjectType, restTemplate));
             }
 
             return allResults;
@@ -46,9 +46,9 @@ public class MultiPageESIRequest<T> {
         }
     }
 
-    private List<T> getForPage(int pageNumber, URI uri, ParameterizedTypeReference esiObjectType, RestTemplate restTemplate){
+    private List<T> getForPage(int pageNumber, int totalNumberOfPages, URI uri, ParameterizedTypeReference esiObjectType, RestTemplate restTemplate){
         URI pageUri = UriComponentsBuilder.fromUri(uri).queryParam("page", pageNumber).build().toUri();
-        logger.info(String.format("Getting page %d at endpoint: %s", pageNumber, pageUri.toString()));
+        logger.info(String.format("Getting page %d/%d at endpoint: %s", pageNumber, totalNumberOfPages, pageUri.toString()));
         MultiValueMap<String, String> requestHeaders = new HttpHeaders();
         HttpEntity<?> entity = new HttpEntity<>(requestHeaders); // for request
         HttpEntity<List<T>> response = restTemplate.exchange(pageUri, HttpMethod.GET, entity, esiObjectType);

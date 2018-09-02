@@ -13,10 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -44,7 +41,7 @@ public class MarketBuyPriceService extends BaseESIController {
 
     private Optional<MarketOrder> getMinSalesPrices(Item item, ImportLocation location, List<MarketOrder> stationMarketOrders) {
         Optional<MarketOrder> cheapestMarketOrder =  stationMarketOrders.stream().filter(marketOrder -> marketOrder.getType_id() == item.getTypeId())
-                                                                        .min((i1, i2) -> Double.compare(i1.getPrice(), i2.getPrice()));
+                                                                        .min(Comparator.comparing(MarketOrder::getPrice));
 
         if (!cheapestMarketOrder.isPresent()) {
             logger.warn("Could not find any sell orders for item " + item.getName() + "in location " + location);

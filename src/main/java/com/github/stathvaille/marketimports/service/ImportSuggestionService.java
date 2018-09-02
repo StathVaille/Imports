@@ -1,6 +1,7 @@
 package com.github.stathvaille.marketimports.service;
 
 import com.github.stathvaille.marketimports.controller.BaseESIController;
+import com.github.stathvaille.marketimports.controller.StationMarketsController;
 import com.github.stathvaille.marketimports.domain.ImportSuggestion;
 import com.github.stathvaille.marketimports.domain.esi.MarketOrder;
 import com.github.stathvaille.marketimports.domain.location.ImportLocation;
@@ -12,6 +13,7 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +26,7 @@ public class ImportSuggestionService {
     public final List<Item> interestingItems;
     private final MarketSellOrderService marketSellOrderService;
     private final MarketBuyPriceService marketBuyPriceService;
+    private final StructureMarketsService structureMarketsService;
     private final ImportLocation importSource;
     private final ImportLocation importDestination;
     private final Double desiredMargin;
@@ -33,12 +36,14 @@ public class ImportSuggestionService {
                                    MarketSellOrderService marketSellOrderService,
                                    MarketBuyPriceService marketBuyPriceService,
                                    MarketHistoryService marketHistoryService,
+                                   StructureMarketsService structureMarketsService,
                                    @Autowired @Qualifier("importSource") ImportLocation importSource,
                                    @Autowired @Qualifier("importDestination") ImportLocation importDestination,
                                    @Autowired @Qualifier("desiredMargin") Double desiredMargin) {
         this.interestingItems = interestingItems;
         this.marketSellOrderService = marketSellOrderService;
         this.marketBuyPriceService = marketBuyPriceService;
+        this.structureMarketsService = structureMarketsService;
         this.importSource = importSource;
         this.importDestination = importDestination;
         this.desiredMargin = desiredMargin;
@@ -49,7 +54,9 @@ public class ImportSuggestionService {
         // TODO use Async to run these in parallel
         Map<Item, Optional<MarketOrder>> itemsMinSellPrice = marketBuyPriceService.getMinSalesPrices(interestingItems, importSource, authentication);
         Map<Item, Double> itemVolumeHistoryInDestination = marketHistoryService.getAverageNumberOfSalesInPast7Days(itemsMinSellPrice.keySet(), importDestination, authentication);
-        Map<Item, List<MarketOrder>> destinationMarketOrdersForAllItems = marketSellOrderService.getMultipleItemOrders(importDestination, interestingItems, authentication);
+
+        Map<Item, List<MarketOrder>> destinationMarketOrdersForAllItems = structureMarketsService.getAllSellOrdersInStructure(importDestination, interestingItems, authentication);
+//        Map<Item, List<MarketOrder>> destinationMarketOrdersForAllItems = marketSellOrderService.getMultipleItemOrders(importDestination, interestingItems, authentication);
 
         return buildImportSuggestions(destinationMarketOrdersForAllItems, itemsMinSellPrice, itemVolumeHistoryInDestination);
     }
