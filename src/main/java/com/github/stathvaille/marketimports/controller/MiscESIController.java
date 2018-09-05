@@ -21,7 +21,7 @@ public class MiscESIController {
         return miscESIService.getUser();
     }
 
-    @GetMapping("location")
+    @GetMapping("/location")
     public CharacterLocation getUserLocation(OAuth2AuthenticationToken authentication) {
         return miscESIService.getUserLocation(authentication);
     }

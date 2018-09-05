@@ -5,6 +5,8 @@
     <title>Import Suggestions</title>
 
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-table/bootstrap-table.css} "/>
+    <link rel="stylesheet" th:href="@{/importSuggestions.css} "/>
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -27,12 +29,27 @@
         </div>
     </nav>
 
-    <div class="container">
+    <main role="main" class="container-fluid">
+        <!--Spinny-->
+        <!--<div id="animationImage" class="starter-template">-->
+            <!--I am loading...-->
+        <!--</div>-->
 
-    </div><!-- /.container -->
+        <!--Suggestions-->
+        <div id="suggestion_container" class="starter-template">
+            <table id="table"
+                   data-pagination="false"
+                   data-search="true"
+                   data-sortable="true"
+            ></table>
+        </div>
+
+    </main>
 
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap-table/bootstrap-table.js}"></script>
+    <script th:src="@{/importSuggestions.js}"></script>
 
 </body>
 </html>

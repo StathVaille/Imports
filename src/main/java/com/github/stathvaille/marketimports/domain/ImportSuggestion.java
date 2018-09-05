@@ -22,4 +22,16 @@ public class ImportSuggestion {
 
     ImportLocation importSource;
     ImportLocation importDestination;
+
+    public Double getProfitPerItem() {
+        return minPriceInDestination - minPriceInSource;
+    }
+
+    public Double getMargin(){
+        return minPriceInDestination / minPriceInSource;
+    }
+
+    public Double getProfitPerDay(){
+        return getProfitPerItem() * numberSoldInDestinationPerDay;
+    }
 }

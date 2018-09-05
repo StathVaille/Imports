@@ -2,9 +2,9 @@
 server.port: 5000
 spring.jackson.serialization.indent_output: true
 
-#interestingItemsFile: InterestingItems.csv
+interestingItemsFile: InterestingItems.csv
 #interestingItemsFile: implants.csv
-interestingItemsFile: dummy_InterestingItems.csv
+#interestingItemsFile: dummy_InterestingItems.csv
 desiredMargin: 1.3
 
 # Stath's CharacterID: 94147919
