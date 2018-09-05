@@ -45,7 +45,10 @@ public class StructureMarketsService extends BaseESIController {
         ParameterizedTypeReference esiObjectType = new ParameterizedTypeReference<List<MarketOrder>>() {};
         List<MarketOrder> marketOrders = multiPageESIRequest.makeESICall(uriComponents.toUri(), esiObjectType, resttemplate);
         // Remove buy orders
-        marketOrders = marketOrders.stream().filter(order -> !order.is_buy_order()).collect(Collectors.toList());
+        marketOrders = marketOrders.stream()
+                                   .filter(order -> !order.is_buy_order())
+                                   .filter(order -> order.getRange().equals("region"))  // Buy orders are still coming up (i think a big). this is a bad filter that I think will help work around
+                                   .collect(Collectors.toList());
         logger.info("Found " + marketOrders.size()  + " market orders in " + location.getStationName());
         return marketOrders;
     }
