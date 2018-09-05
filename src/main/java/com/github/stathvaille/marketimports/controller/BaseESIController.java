@@ -18,11 +18,6 @@ public abstract class BaseESIController {
     protected OAuth2AuthorizedClientService authorizedClientService;
 
     protected RestTemplate getOAuthRestTemplate(OAuth2AuthenticationToken authentication){
-//    protected RestTemplate getOAuthRestTemplate(){
-
-        // TODO dodgy cast here...
-//        OAuth2AuthenticationToken authentication = (OAuth2AuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-
         OAuth2AuthorizedClient client = authorizedClientService.loadAuthorizedClient(authentication.getAuthorizedClientRegistrationId(), authentication.getName());
         List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
         interceptors.add((request, body, execution) -> {
