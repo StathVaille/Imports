@@ -1,7 +1,34 @@
+shoppingList = [];
+
 $( document ).ready(function() {
     //loadSuggestions();
+    loadImportLocations();
     buildTable();
 });
+
+function loadImportLocations() {
+    $.ajax({
+        url : "/ui/importSource",
+        type : "GET",
+        success : function(data) {
+            $("#import_source").html(data.systemName + ": " + data.stationName);
+        },
+        error : function(data) {
+            $("#import_source").html("Error");
+        }
+    });
+
+    $.ajax({
+        url : "/ui/importDestination",
+        type : "GET",
+        success : function(data) {
+            $("#import_destination").html(data.systemName + ": " + data.stationName);
+        },
+        error : function(data) {
+            $("#import_destination").html("Error");
+        }
+    });
+}
 
 function loadSuggestions() {
     $('#animationImage').show();
@@ -26,6 +53,8 @@ function loadSuggestions() {
 function buildTable() {
     $('#table').bootstrapTable({
         url: '/ui/imports',
+        sortName: "profitPerDay",
+        sortOrder: "desc",
         columns: [{
             field: 'icon',
             title: '',
@@ -63,16 +92,17 @@ function buildTable() {
             title: 'Sales/day',
             sortable: true,
             formatter: salesPerDayFormatter
-//        }, {
-//            field: 'profitPerItem',
-//            title: 'Profit/Item',
-//            sortable: true,
-//            formatter: iskFormatter
         }, {
             field: 'profitPerDay',
             title: 'Profit/Day',
             sortable: true,
             formatter: iskFormatter
+        }, {
+            field: 'button',
+            title: 'Add',
+            sortable: false,
+            formatter: buttonFormatter,
+            events: operateEvents
         }],
     });
 }
@@ -96,5 +126,16 @@ function marginFormatter(margin) {
 
 function salesPerDayFormatter(salesPerDay) {
     salesPerDay = salesPerDay.toFixed(2);
+    salesPerDay = salesPerDay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return salesPerDay;
 }
+
+function buttonFormatter(row, index, field) {
+    return '<button type="button" class="btn btn-outline-primary add" href="javascript:void(0)">Add</button>'
+}
+
+window.operateEvents = {
+    'click .add': function (e, value, importSuggestion, index) {
+        shoppingList.push(importSuggestion);
+    }
+};

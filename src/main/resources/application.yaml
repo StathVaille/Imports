@@ -25,7 +25,7 @@ importDestination:
 #  stationId: 61000182
 #  stationId: 1023729674815  # Broadcast for reps
   stationId: 1027847407700   # SOTA Factory
-  stationName: "GE-8JV SOTA Factory"
+  stationName: "SOTA Factory"
 
 spring.security.oauth2.client:
   registration.ssoclient:

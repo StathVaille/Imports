@@ -30,13 +30,19 @@
     </nav>
 
     <main role="main" class="container-fluid">
-        <!--Spinny-->
-        <!--<div id="animationImage" class="starter-template">-->
-            <!--I am loading...-->
-        <!--</div>-->
 
         <!--Suggestions-->
         <div id="suggestion_container" class="starter-template">
+            <div>
+                <span><b>Importing from:  </b></span>
+                <span id="import_source">loading...</span>
+            </div>
+
+            <div>
+                <span><b>Importing To:  </b></span>
+                <span id="import_destination">loading...</span>
+            </div>
+
             <table id="table"
                    data-pagination="false"
                    data-search="true"
