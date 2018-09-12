@@ -25,6 +25,7 @@ Navy Cap Booster 400,32006
 Navy Cap Booster 50,33332
 Navy Cap Booster 75,33334
 Navy Cap Booster 800,32014
+Cap Booster 3200,41489
 Nova Fury Light Missile,24497
 Null L,12787
 Null M,12785
@@ -52,6 +53,14 @@ Republic Fleet Titanium Sabot M,21937
 Republic Fleet Depleted Uranium M,28334
 Tremor M,12771
 Quake M,12767
+Inferno Rage Torpedo,2811
+Nova Rage Torpedo,24519
+Scourge Rage Torpedo,24521
+Mjolnir Rage Torpedo,24523
+Scourge Rage Heavy Assault Missile,2679
+Inferno Rage Heavy Assault Missile,24486
+Nova Rage Heavy Assault Missile,24488
+Mjolnir Rage Heavy Assault Missile,24490
 ,
 Drones,
 Acolyte II,2205
@@ -78,6 +87,9 @@ Warden II,28209
 Caldari Navy Wasp,31876
 Einherji,23061
 Einherji II,40559
+Gecko,33681
+Republic Fleet Berserker,31892
+Berserker II,2478
 ,
 Guns,
 125mm Gatling AutoCannon II,2873
@@ -117,6 +129,7 @@ Heavy Missile Launcher II,2410
 720mm 'Scout' Artillery I,9451
 720mm Howitzer Artillery II,2969
 Heavy Beam Laser II,3025
+Hexa 2500mm Repeating Cannon II,37306
 ,
 Equipment,
 100MN Afterburner II,12068
@@ -191,8 +204,31 @@ Reactor Control Unit II,1355
 Republic Fleet Large Shield Extender,31932
 Republic Fleet Medium Shield Extender,31928
 Assault Damage Control II,47257
+Prototype Cloaking Device I,11370
+Capital Shield Extender II,40357
+Fighter Support Unit,41414
+Fighter Support Unit II,41415
+Networked Sensor Array,41411
+Capital Capacitor Booster I,41491
+Capital Clarity Ward Enduring Shield Booster,41506
+Siege Module II,4292
+Pulse Activated Nexus Invulnerability Core,42522
+Industrial Core II,42890
+Capital Shield Booster II,41507
 ,
 Rigs,
+Capital Core Defense Field Extender I,31792
+Capital Core Defense Field Extender II,31798
+Capital Anti-EM Screen Reinforcer I,31720
+Capital Anti-EM Screen Reinforcer II,31726
+Capital Anti-Explosive Screen Reinforcer I,31732
+Capital Anti-Explosive Screen Reinforcer II,31738
+Capital Anti-Kinetic Screen Reinforcer I,31744
+Capital Anti-Kinetic Screen Reinforcer II,31750
+Capital Anti-Thermal Screen Reinforcer I,31756
+Capital Anti-Thermal Screen Reinforcer II,31762
+Capital Projectile Metastasis Adjuster I,31708
+Capital Drone Mining Augmentor I,33285
 Large Anti-EM Screen Reinforcer I,26076
 Large Capacitor Control Circuit I,25948
 Large Core Defense Field Extender I,26088
@@ -255,6 +291,7 @@ Helium Isotopes,16274
 Hydrogen Isotopes,17889
 Nitrogen Isotopes,17888
 Oxygen Isotopes,17887
+'Wetu' Mobile Depot,33520
 ,
 Ships,
 Moa,623

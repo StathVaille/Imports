@@ -32,6 +32,7 @@ public class ImportSuggestion {
     }
 
     public Double getProfitPerDay(){
-        return getProfitPerItem() * numberSoldInDestinationPerDay;
+        Double profit = getProfitPerItem() * numberSoldInDestinationPerDay;
+        return Math.max(0, profit);
     }
 }

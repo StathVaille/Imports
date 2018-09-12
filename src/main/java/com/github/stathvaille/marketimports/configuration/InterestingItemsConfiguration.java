@@ -13,10 +13,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -38,8 +35,8 @@ public class InterestingItemsConfiguration {
     List<Item> interestingItems(@Autowired ItemService itemService) throws IOException {
 
         Resource resource = new ClassPathResource("/" + interestingItemsFile);
-        FileReader fileReader = new FileReader(resource.getFile());
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        InputStreamReader isr = new InputStreamReader(resource.getInputStream());
+        BufferedReader bufferedReader = new BufferedReader(isr);
 
         List<Item> items = new ArrayList<>();
         String line;
