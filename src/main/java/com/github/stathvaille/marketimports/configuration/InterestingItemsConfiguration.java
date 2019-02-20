@@ -64,7 +64,7 @@ public class InterestingItemsConfiguration {
 
     private long parseTypeId(String typeIdString) {
         try {
-            return Long.parseLong(typeIdString);
+            return Long.parseLong(typeIdString.trim());
         } catch (NumberFormatException e) {
             logger.error("Could not parse type id to long: " + typeIdString);
             throw new RuntimeException("Could not parse type id to long: " + typeIdString, e);

@@ -27,19 +27,17 @@ import java.util.stream.Collectors;
 @Service
 public class MarketHistoryService extends BaseESIController {
 
-    private static final String apiTemplate = "https://esi.tech.ccp.is/latest/markets/%s/history/?datasource=tranquility&type_id=%s";
+    private static final String apiTemplate = "https://esi.evetech.net/latest/markets/%s/history/?datasource=tranquility&type_id=%s";
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final static DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
     public Double getAverageNumberOfSalesInPast7Days(Item item, ImportLocation importLocation, OAuth2AuthenticationToken authentication){
         try{
-//            RestTemplate restTemplate = new RestTemplate();
             RestTemplate restTemplate = getOAuthRestTemplate(authentication);
 
             String url = String.format(apiTemplate, importLocation.getRegionId(), item.getTypeId());
             Map[] itemHistoryArray = restTemplate.getForObject(url, HashMap[].class);
             List<Map> itemHistoryList = Arrays.asList(itemHistoryArray);
-
 
             LocalDate sevenDaysAgo = LocalDate.now().minusDays(8);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

@@ -25,6 +25,7 @@ Navy Cap Booster 400,32006
 Navy Cap Booster 50,33332
 Navy Cap Booster 75,33334
 Navy Cap Booster 800,32014
+Navy Cap Booster 3200,41490
 Cap Booster 3200,41489
 Nova Fury Light Missile,24497
 Null L,12787
@@ -90,6 +91,7 @@ Einherji II,40559
 Gecko,33681
 Republic Fleet Berserker,31892
 Berserker II,2478
+'Excavator'' Mining Drone,41030
 ,
 Guns,
 125mm Gatling AutoCannon II,2873
@@ -130,6 +132,7 @@ Heavy Missile Launcher II,2410
 720mm Howitzer Artillery II,2969
 Heavy Beam Laser II,3025
 Hexa 2500mm Repeating Cannon II,37306
+Polarized Torpedo Launcher,34294
 ,
 Equipment,
 100MN Afterburner II,12068
@@ -215,6 +218,11 @@ Siege Module II,4292
 Pulse Activated Nexus Invulnerability Core,42522
 Industrial Core II,42890
 Capital Shield Booster II,41507
+Republic Fleet Small Shield Extender,31924
+Triage Module II,4294
+Triage Module I,27951
+CONCORD Capital Shield Extender,41459
+CONCORD Capital Shield Booster,3542
 ,
 Rigs,
 Capital Core Defense Field Extender I,31792
@@ -292,6 +300,7 @@ Hydrogen Isotopes,17889
 Nitrogen Isotopes,17888
 Oxygen Isotopes,17887
 'Wetu' Mobile Depot,33520
+Heavy Water,28437
 ,
 Ships,
 Moa,623
@@ -329,6 +338,8 @@ Jackdaw,34828
 Confessor,34317
 Hecate,35683
 Hurricane,24702
+Ferox,16227
+Brutix,16229
 Augoror Navy Issue,29337
 Vexor navy issue,17843
 Hugin,11961
@@ -388,3 +399,10 @@ Implants,
  Standard Crash Booster,9947
  Standard Drop Booster,15466
  Eifyr and Co. 'Rogue' Warp Drive Speed WS-605,27115
+ Mining Foreman Mindlink,22559
+ Agency 'Pyrolancea' DB7 Dose III, 46000
+ Agency 'Hardshell' TB7 Dose III, 46003
+ Agency 'Overclocker' SB7 Dose III, 46006
+ Agency 'Hardshell' TB9 Dose IV, 48113
+ Agency 'Overclocker' SB9 Dose IV, 48114
+ Agency 'Pyrolancea' DB9 Dose IV, 48115
