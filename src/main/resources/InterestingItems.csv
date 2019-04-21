@@ -62,6 +62,13 @@ Scourge Rage Heavy Assault Missile,2679
 Inferno Rage Heavy Assault Missile,24486
 Nova Rage Heavy Assault Missile,24488
 Mjolnir Rage Heavy Assault Missile,24490
+Republic Fleet Proton L,21926
+Republic Fleet Fusion L,21902
+Republic Fleet EMP L,21894
+Republic Fleet Depleted Uranium L,28332,
+Mjolnir Rage Rocket, 5020
+Federation Navy Thorium Charge M,4170
+Warp Disrupt Probe, 22778
 ,
 Drones,
 Acolyte II,2205
@@ -92,6 +99,7 @@ Gecko,33681
 Republic Fleet Berserker,31892
 Berserker II,2478
 'Excavator'' Mining Drone,41030
+Mining Drone II,10250
 ,
 Guns,
 125mm Gatling AutoCannon II,2873
@@ -133,6 +141,12 @@ Heavy Missile Launcher II,2410
 Heavy Beam Laser II,3025
 Hexa 2500mm Repeating Cannon II,37306
 Polarized Torpedo Launcher,34294
+1400mm Howitzer Artillery II,2961
+1400mm 'Scout' Artillery I,9491
+Rapid Light Missile Launcher II,1877
+150mm Prototype Gauss Gun,7287
+Small Focused Beam Laser II,3033
+Small Focused Pulse Laser II,3041
 ,
 Equipment,
 100MN Afterburner II,12068
@@ -223,7 +237,32 @@ Triage Module II,4294
 Triage Module I,27951
 CONCORD Capital Shield Extender,41459
 CONCORD Capital Shield Booster,3542
-,
+Medium Murky Compact Remote Shield Booster,8579
+Pithum C-Type Medium Remote Shield Booster,19147
+Prototype 'Arbalest' Torpedo Launcher,8117
+Warp Disruption Field Generator II,4248
+Micro Auxiliary Power Core II,4254
+Nanofiber Internal Structure II,2605
+Medium 'Regard' Remote Capacitor Transmitter,16495
+Medium Compact Pb-Acid Cap Battery,6073
+Entosis Link II,34595
+Entosis Link I,34593
+Sensor Booster II, 1952
+Reinforced Bulkheads II,1335
+Cap Recharger II,2032
+Heat Sink II,2364
+Medium Ghoul Compact Energy Nosferatu, 16505
+Large 'Regard' Remote Capacitor Transmitter,16487
+Remote Sensor Dampener II,1969
+Drone Navigation Computer II, 24417
+Ballistic Control System II,22291
+Inertial Stabilizers II, 1405
+Adaptive Nano Plating II,1306
+Small Energy Neutralizer II, 13003
+Omnidirectional Tracking Enhancer II,33824
+Small Processor Overclocking Unit II,26931
+Drone Link Augmentor II,24427
+1MN Afterburner II, 438
 Rigs,
 Capital Core Defense Field Extender I,31792
 Capital Core Defense Field Extender II,31798
@@ -286,6 +325,21 @@ Small Emission Scope Sharpener I,31201
 Small Salvage Tackle I,31083
 Small Particle Dispersion Projector I,31298
 Small Ionic Field Projector I,31274
+Small Ancillary Current Router II,31364
+Small Polycarbon Engine Housing II,31183
+Small Low Friction Nozzle Joints II,31171
+Medium Capacitor Control Circuit II,31378
+Medium Core Defense Field Purger II, 31812
+Small Hyperspatial Velocity Optimizer II, 31165
+Medium Ancillary Current Router II,31366
+Medium Hybrid Locus Coordinator II, 31570
+Medium Hyperspatial Velocity Optimizer II,31167
+Medium Core Defense Field Extender II, 31796
+Small Energy Locus Coordinator II, 31484
+Medium Polycarbon Engine Housing II,31185
+Small Projectile Collision Accelerator II,31686
+Medium Energy Locus Coordinator II,31486
+Medium Cargohold Optimization II,31125
 ,
 Other,
 Mobile Large Warp Disruptor I,12200
@@ -300,7 +354,7 @@ Hydrogen Isotopes,17889
 Nitrogen Isotopes,17888
 Oxygen Isotopes,17887
 'Wetu' Mobile Depot,33520
-Heavy Water,28437
+Heavy Water,16272
 ,
 Ships,
 Moa,623
@@ -355,54 +409,57 @@ Omen Navy Issue,17709
 Osprey Navy Issue,29340
 Scythe Fleet Issue,29336
 Retribution,11393
-Ashimu,43534
+Ashimu,43604
 Jaguar,11400
 Wolf,11371
+Gila,17715
+Rattlesnake,17918
+Onyx,11995
 ,
 Implants,
- Limited Neural Boost,13285
- Neural Boost - Basic,9942
- Limited Neural Boost - Beta,14296
- Neural Boost - Standard,10212
- Neural Boost - Improved,10213
- Limited Ocular Filter,13283
- Ocular Filter - Basic,9899
- Limited Ocular Filter - Beta,14295
- Ocular Filter - Standard,10216
- Ocular Filter - Improved,10217
- Limited Memory Augmentation,13284
- Memory Augmentation - Basic,9941
- Limited Memory Augmentation - Beta,14297
- Memory Augmentation - Standard,10208
- Memory Augmentation - Improved,10209
- Limited Cybernetic Subprocessor,13287
- Cybernetic Subprocessor - Basic,9943
- Limited Cybernetic Subprocessor - Beta,14298
- Cybernetic Subprocessor - Standard,10221
- Cybernetic Subprocessor - Improved,10222
- Limited Social Adaptation Chip,13286
- Social Adaptation Chip - Basic,9956
- Limited Social Adaptation Chip - Beta,14299
- Social Adaptation Chip - Standard,10225
- Social Adaptation Chip - Improved,10226
- Zainou 'Gypsy' CPU Management EE-602,3265
- Zainou 'Gypsy' CPU Management EE-603,13216
- Inherent Implants 'Squire' Power Grid Management EG-602,3256
- Strong Blue Pill Booster,10156
- Inherent Implants 'Squire' Power Grid Management EG-601,27127
- Zainou 'Gypsy' CPU Management EE-605,27142
- Standard Exile Booster,15479
- Standard Mindflood Booster,15463
- Zainou 'Gnome' Shield Emission Systems SE-803,13262
- Zainou 'Gypsy' CPU Management EE-601,27143
- Standard Blue Pill Booster,9950
- Standard Crash Booster,9947
- Standard Drop Booster,15466
- Eifyr and Co. 'Rogue' Warp Drive Speed WS-605,27115
- Mining Foreman Mindlink,22559
- Agency 'Pyrolancea' DB7 Dose III, 46000
- Agency 'Hardshell' TB7 Dose III, 46003
- Agency 'Overclocker' SB7 Dose III, 46006
- Agency 'Hardshell' TB9 Dose IV, 48113
- Agency 'Overclocker' SB9 Dose IV, 48114
- Agency 'Pyrolancea' DB9 Dose IV, 48115
+Limited Neural Boost,13285
+Neural Boost - Basic,9942
+Limited Neural Boost - Beta,14296
+Neural Boost - Standard,10212
+Neural Boost - Improved,10213
+Limited Ocular Filter,13283
+Ocular Filter - Basic,9899
+Limited Ocular Filter - Beta,14295
+Ocular Filter - Standard,10216
+Ocular Filter - Improved,10217
+Limited Memory Augmentation,13284
+Memory Augmentation - Basic,9941
+Limited Memory Augmentation - Beta,14297
+Memory Augmentation - Standard,10208
+Memory Augmentation - Improved,10209
+Limited Cybernetic Subprocessor,13287
+Cybernetic Subprocessor - Basic,9943
+Limited Cybernetic Subprocessor - Beta,14298
+Cybernetic Subprocessor - Standard,10221
+Cybernetic Subprocessor - Improved,10222
+Limited Social Adaptation Chip,13286
+Social Adaptation Chip - Basic,9956
+Limited Social Adaptation Chip - Beta,14299
+Social Adaptation Chip - Standard,10225
+Social Adaptation Chip - Improved,10226
+Zainou 'Gypsy' CPU Management EE-602,3265
+Zainou 'Gypsy' CPU Management EE-603,13216
+Inherent Implants 'Squire' Power Grid Management EG-602,3256
+Strong Blue Pill Booster,10156
+Inherent Implants 'Squire' Power Grid Management EG-601,27127
+Zainou 'Gypsy' CPU Management EE-605,27142
+Standard Exile Booster,15479
+Standard Mindflood Booster,15463
+Zainou 'Gnome' Shield Emission Systems SE-803,13262
+Zainou 'Gypsy' CPU Management EE-601,27143
+Standard Blue Pill Booster,9950
+Standard Crash Booster,9947
+Standard Drop Booster,15466
+Eifyr and Co. 'Rogue' Warp Drive Speed WS-605,27115
+Mining Foreman Mindlink,22559
+Agency 'Pyrolancea' DB7 Dose III, 46000
+Agency 'Hardshell' TB7 Dose III, 46003
+Agency 'Overclocker' SB7 Dose III, 46006
+Agency 'Hardshell' TB9 Dose IV, 48113
+Agency 'Overclocker' SB9 Dose IV, 48114
+Agency 'Pyrolancea' DB9 Dose IV, 48115
