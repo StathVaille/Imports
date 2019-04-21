@@ -1,8 +1,7 @@
-package com.github.stathvaille.marketimports.imports.controller;
+package com.github.stathvaille.marketimports.esi;
 
-import com.github.stathvaille.marketimports.imports.domain.EveUser;
+import com.github.stathvaille.marketimports.esi.domain.EveUser;
 import com.github.stathvaille.marketimports.esi.domain.CharacterLocation;
-import com.github.stathvaille.marketimports.esi.service.MiscESIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +24,4 @@ public class MiscESIController {
     public CharacterLocation getUserLocation(OAuth2AuthenticationToken authentication) {
         return miscESIService.getUserLocation(authentication);
     }
-
-
 }

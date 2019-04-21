@@ -1,9 +1,9 @@
-package com.github.stathvaille.marketimports.imports.configuration;
+package com.github.stathvaille.marketimports.items;
 
-import com.github.stathvaille.marketimports.imports.domain.staticdataexport.Group;
-import com.github.stathvaille.marketimports.imports.domain.staticdataexport.Groups;
-import com.github.stathvaille.marketimports.imports.domain.staticdataexport.Item;
-import com.github.stathvaille.marketimports.imports.domain.staticdataexport.Items;
+import com.github.stathvaille.marketimports.items.staticdataexport.Group;
+import com.github.stathvaille.marketimports.items.staticdataexport.Groups;
+import com.github.stathvaille.marketimports.items.staticdataexport.Item;
+import com.github.stathvaille.marketimports.items.staticdataexport.Items;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;

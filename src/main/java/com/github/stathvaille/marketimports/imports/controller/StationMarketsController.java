@@ -1,7 +1,7 @@
 package com.github.stathvaille.marketimports.imports.controller;
 
 import com.github.stathvaille.marketimports.esi.domain.MarketOrder;
-import com.github.stathvaille.marketimports.esi.service.ESIClient;
+import com.github.stathvaille.marketimports.esi.ESIClient;
 import com.github.stathvaille.marketimports.imports.domain.location.ImportLocation;
 import com.github.stathvaille.marketimports.imports.service.StructureMarketsService;
 import org.slf4j.Logger;

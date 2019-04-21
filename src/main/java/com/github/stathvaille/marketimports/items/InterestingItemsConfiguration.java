@@ -1,7 +1,7 @@
-package com.github.stathvaille.marketimports.imports.configuration;
+package com.github.stathvaille.marketimports.items;
 
-import com.github.stathvaille.marketimports.imports.domain.staticdataexport.Item;
-import com.github.stathvaille.marketimports.imports.service.ItemService;
+import com.github.stathvaille.marketimports.items.staticdataexport.Item;
+import com.github.stathvaille.marketimports.items.ItemService;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

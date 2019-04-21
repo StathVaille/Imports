@@ -1,7 +1,8 @@
 package com.github.stathvaille.marketimports.imports.service;
 
-import com.github.stathvaille.marketimports.imports.domain.staticdataexport.Item;
-import com.github.stathvaille.marketimports.imports.domain.staticdataexport.Items;
+import com.github.stathvaille.marketimports.items.staticdataexport.Item;
+import com.github.stathvaille.marketimports.items.staticdataexport.Items;
+import com.github.stathvaille.marketimports.items.ItemService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,8 @@ import static org.junit.Assert.assertThat;
 public class ItemServiceTest {
 
     @Autowired Items items;
-    @Autowired ItemService itemService;
+    @Autowired
+    ItemService itemService;
 
     @Test
     public void itemsLoadedTest() throws Exception {

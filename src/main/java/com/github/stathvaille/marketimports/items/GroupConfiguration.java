@@ -1,10 +1,10 @@
-package com.github.stathvaille.marketimports.imports.configuration;
+package com.github.stathvaille.marketimports.items;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.github.stathvaille.marketimports.imports.domain.staticdataexport.Group;
-import com.github.stathvaille.marketimports.imports.domain.staticdataexport.Groups;
+import com.github.stathvaille.marketimports.items.staticdataexport.Group;
+import com.github.stathvaille.marketimports.items.staticdataexport.Groups;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;

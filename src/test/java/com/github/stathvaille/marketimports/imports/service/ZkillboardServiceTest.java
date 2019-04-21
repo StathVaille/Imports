@@ -2,7 +2,8 @@ package com.github.stathvaille.marketimports.imports.service;
 
 import com.github.stathvaille.marketimports.imports.domain.ZkilboardKillmail;
 import com.github.stathvaille.marketimports.esi.domain.ESIKillmail;
-import com.github.stathvaille.marketimports.imports.domain.staticdataexport.Item;
+import com.github.stathvaille.marketimports.items.staticdataexport.Item;
+import com.github.stathvaille.marketimports.items.ItemService;
 import com.github.stathvaille.marketimports.killmails.ZkillboardService;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -26,7 +27,8 @@ public class ZkillboardServiceTest {
 
     @Autowired
     ZkillboardService zkillboardService;
-    @Autowired ItemService itemService;
+    @Autowired
+    ItemService itemService;
     @Autowired @Qualifier("interestingItems") List<Item> interestingItems;
 
     private int braveAllianceId = 99003214;

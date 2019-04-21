@@ -1,4 +1,4 @@
-package com.github.stathvaille.marketimports.esi.service;
+package com.github.stathvaille.marketimports.esi;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

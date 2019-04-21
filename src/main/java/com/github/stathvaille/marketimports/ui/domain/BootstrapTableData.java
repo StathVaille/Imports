@@ -1,4 +1,4 @@
-package com.github.stathvaille.marketimports.imports.domain.ui;
+package com.github.stathvaille.marketimports.ui.domain;
 
 import lombok.Data;
 

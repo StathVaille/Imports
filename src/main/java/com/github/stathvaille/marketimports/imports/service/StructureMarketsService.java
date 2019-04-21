@@ -1,10 +1,10 @@
 package com.github.stathvaille.marketimports.imports.service;
 
-import com.github.stathvaille.marketimports.esi.service.ESIClient;
+import com.github.stathvaille.marketimports.esi.ESIClient;
 import com.github.stathvaille.marketimports.esi.domain.MarketOrder;
 import com.github.stathvaille.marketimports.imports.domain.location.ImportLocation;
-import com.github.stathvaille.marketimports.imports.domain.staticdataexport.Item;
-import com.github.stathvaille.marketimports.esi.service.MultiPageESIRequest;
+import com.github.stathvaille.marketimports.items.staticdataexport.Item;
+import com.github.stathvaille.marketimports.esi.MultiPageESIRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;

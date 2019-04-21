@@ -1,7 +1,7 @@
 package com.github.stathvaille.marketimports.killmails;
 
 import com.github.stathvaille.marketimports.imports.domain.EveMarketeerValuation;
-import com.github.stathvaille.marketimports.imports.domain.staticdataexport.Item;
+import com.github.stathvaille.marketimports.items.staticdataexport.Item;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

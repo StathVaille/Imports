@@ -2,8 +2,8 @@ package com.github.stathvaille.marketimports.ui.controller;
 
 import com.github.stathvaille.marketimports.imports.domain.ImportSuggestion;
 import com.github.stathvaille.marketimports.imports.domain.location.ImportLocation;
-import com.github.stathvaille.marketimports.imports.domain.ui.BootstrapTableData;
-import com.github.stathvaille.marketimports.imports.domain.ui.BootstrapTableRow;
+import com.github.stathvaille.marketimports.ui.domain.BootstrapTableData;
+import com.github.stathvaille.marketimports.ui.domain.BootstrapTableRow;
 import com.github.stathvaille.marketimports.imports.service.ImportSuggestionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

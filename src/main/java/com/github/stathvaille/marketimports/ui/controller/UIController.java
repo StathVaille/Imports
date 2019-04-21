@@ -1,6 +1,6 @@
 package com.github.stathvaille.marketimports.ui.controller;
 
-import com.github.stathvaille.marketimports.esi.service.MiscESIService;
+import com.github.stathvaille.marketimports.esi.MiscESIService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

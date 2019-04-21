@@ -1,4 +1,4 @@
-package com.github.stathvaille.marketimports.imports.domain.staticdataexport;
+package com.github.stathvaille.marketimports.items.staticdataexport;
 
 import lombok.Value;
 

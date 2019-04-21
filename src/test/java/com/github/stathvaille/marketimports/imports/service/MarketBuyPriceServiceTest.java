@@ -2,7 +2,7 @@
 //
 //import com.github.stathvaille.marketimports.MarketImportsApplication;
 //import com.github.stathvaille.marketimports.imports.domain.location.ImportLocation;
-//import com.github.stathvaille.marketimports.imports.domain.staticdataexport.Item;
+//import com.github.stathvaille.marketimports.items.staticdataexport.Item;
 //import org.junit.Test;
 //import org.junit.runner.RunWith;
 //import org.springframework.beans.factory.annotation.Autowired;

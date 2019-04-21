@@ -1,4 +1,4 @@
-package com.github.stathvaille.marketimports.esi.service;
+package com.github.stathvaille.marketimports.esi;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;

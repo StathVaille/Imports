@@ -3,7 +3,7 @@ package com.github.stathvaille.marketimports.imports.service;
 import com.github.stathvaille.marketimports.imports.domain.ImportSuggestion;
 import com.github.stathvaille.marketimports.esi.domain.MarketOrder;
 import com.github.stathvaille.marketimports.imports.domain.location.ImportLocation;
-import com.github.stathvaille.marketimports.imports.domain.staticdataexport.Item;
+import com.github.stathvaille.marketimports.items.staticdataexport.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

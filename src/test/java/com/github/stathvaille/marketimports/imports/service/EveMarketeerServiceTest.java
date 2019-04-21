@@ -1,7 +1,8 @@
 package com.github.stathvaille.marketimports.imports.service;
 
 import com.github.stathvaille.marketimports.imports.domain.EveMarketeerValuation;
-import com.github.stathvaille.marketimports.imports.domain.staticdataexport.Item;
+import com.github.stathvaille.marketimports.items.staticdataexport.Item;
+import com.github.stathvaille.marketimports.items.ItemService;
 import com.github.stathvaille.marketimports.killmails.EveMarketeerService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +16,8 @@ public class EveMarketeerServiceTest {
 
     @Autowired
     EveMarketeerService eveMarketeerService;
-    @Autowired ItemService itemService;
+    @Autowired
+    ItemService itemService;
 
     @Test
     public void getItemPrice() {

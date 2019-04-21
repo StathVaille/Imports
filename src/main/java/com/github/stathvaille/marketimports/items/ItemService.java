@@ -1,7 +1,7 @@
-package com.github.stathvaille.marketimports.imports.service;
+package com.github.stathvaille.marketimports.items;
 
-import com.github.stathvaille.marketimports.imports.domain.staticdataexport.Item;
-import com.github.stathvaille.marketimports.imports.domain.staticdataexport.Items;
+import com.github.stathvaille.marketimports.items.staticdataexport.Item;
+import com.github.stathvaille.marketimports.items.staticdataexport.Items;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
 package com.github.stathvaille.marketimports.imports.domain;
 
 import com.github.stathvaille.marketimports.imports.domain.location.ImportLocation;
-import com.github.stathvaille.marketimports.imports.domain.staticdataexport.Item;
+import com.github.stathvaille.marketimports.items.staticdataexport.Item;
 import lombok.Data;
 
 @Data

@@ -1,17 +1,14 @@
-package com.github.stathvaille.marketimports.imports.domain.staticdataexport;
+package com.github.stathvaille.marketimports.items.staticdataexport;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Item {
-    private long typeId;
-    private int graphicID;
+public class Group {
     private long groupID;
-    private LocalisedString description;
+    private int iconID;
     private LocalisedString name;
-    private double volume;
 
     @Override
     public String toString(){
