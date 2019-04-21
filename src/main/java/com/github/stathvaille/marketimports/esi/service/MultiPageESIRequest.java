@@ -14,6 +14,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Utility code for handling ESI calls which may have multiple pages of response
@@ -21,8 +23,6 @@ import java.util.List;
 public class MultiPageESIRequest<T> {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-
-    // TODO Async this to run queries in parallel
     public List<T> makeESICall(URI uri, ParameterizedTypeReference esiObjectType, RestTemplate restTemplate){
         try{
             // First get headers to figure out how many pages there are
@@ -30,10 +30,13 @@ public class MultiPageESIRequest<T> {
             int numberOfPages = Integer.parseInt(responseHeader.getFirst("X-Pages"));
             logger.info(String.format("There are %d pages for endpoint: %s", numberOfPages, uri));
 
-            List<T> allResults = new ArrayList<>();
-            for (int page = 1; page <= numberOfPages; page++){
-                allResults.addAll(getForPage(page, numberOfPages, uri, esiObjectType, restTemplate));
-            }
+
+            List<T> allResults = IntStream.rangeClosed(1, numberOfPages)
+                    .boxed()
+                    .parallel()
+                    .map(page -> getForPage(page, numberOfPages, uri, esiObjectType, restTemplate))
+                    .flatMap(List::stream)
+                    .collect(Collectors.toList());
 
             return allResults;
         }
