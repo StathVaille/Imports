@@ -5,9 +5,11 @@ import com.github.stathvaille.marketimports.esi.domain.MarketOrder;
 import com.github.stathvaille.marketimports.imports.domain.location.ImportLocation;
 import com.github.stathvaille.marketimports.items.staticdataexport.Item;
 import com.github.stathvaille.marketimports.esi.MultiPageESIRequest;
+import lombok.Value;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -15,6 +17,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 @Service
@@ -54,7 +57,8 @@ public class StructureMarketsService extends ESIClient {
         return marketOrders;
     }
 
-    public Map<Item, List<MarketOrder>> getAllSellOrdersInStructure(ImportLocation location, List<Item> interestingItems, OAuth2AuthenticationToken authentication) {
+    @Async
+    public CompletableFuture<StructureSellOrdersResults> getAllSellOrdersInStructure(ImportLocation location, List<Item> interestingItems, OAuth2AuthenticationToken authentication) {
         logger.info("Getting all sell orders on " + location.getStationName() + " for " + interestingItems.size() + " interesting items");
         List<MarketOrder> allSellOrders = getAllSellOrdersInStructure(location, authentication);
 
@@ -72,6 +76,12 @@ public class StructureMarketsService extends ESIClient {
             }
         }
 
-        return itemOrders;
+        StructureSellOrdersResults results = new StructureSellOrdersResults(itemOrders);
+        return CompletableFuture.completedFuture(results);
+    }
+
+    @Value
+    public class StructureSellOrdersResults {
+        private Map<Item, List<MarketOrder>> results;
     }
 }

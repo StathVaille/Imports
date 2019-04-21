@@ -5,17 +5,22 @@ import com.github.stathvaille.marketimports.esi.domain.MarketOrder;
 import com.github.stathvaille.marketimports.imports.domain.location.ImportLocation;
 import com.github.stathvaille.marketimports.items.staticdataexport.Item;
 import com.github.stathvaille.marketimports.esi.MultiPageESIRequest;
+import lombok.Data;
+import lombok.Value;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.constraints.Min;
 import java.net.URI;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 /**
@@ -33,12 +38,19 @@ public class MarketBuyPriceService extends ESIClient {
         multiPageESIRequest = new MultiPageESIRequest<>();
     }
 
-    public Map<Item, Optional<MarketOrder>> getMinSalesPrices(List<Item> items, ImportLocation location, OAuth2AuthenticationToken authentication) {
+    @Value
+    public class MinSalesPriceResults {
+        private Map<Item, Optional<MarketOrder>> results;
+    }
+
+    @Async
+    public CompletableFuture<MinSalesPriceResults> getMinSalesPrices(List<Item> items, ImportLocation location, OAuth2AuthenticationToken authentication) {
         List<MarketOrder> stationMarketOrders = getAllSellOrdersAtStation(location, authentication);
 
         Map<Item, Optional<MarketOrder>> itemBuyPrices = new HashMap<>();
         items.stream().forEach(item -> itemBuyPrices.put(item, getMinSalesPrices(item, location, stationMarketOrders)));
-        return itemBuyPrices;
+        MinSalesPriceResults results = new MinSalesPriceResults(itemBuyPrices);
+        return CompletableFuture.completedFuture(results);
     }
 
     private Optional<MarketOrder> getMinSalesPrices(Item item, ImportLocation location, List<MarketOrder> stationMarketOrders) {

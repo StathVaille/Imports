@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @Service
 public class ImportSuggestionService {
@@ -50,15 +52,25 @@ public class ImportSuggestionService {
     public List<ImportSuggestion> getImportSuggestions(OAuth2AuthenticationToken authentication){
         long startTime = System.currentTimeMillis();
 
-        // TODO use Async to run these in parallel
-        Map<Item, Optional<MarketOrder>> itemsMinSellPrice = marketBuyPriceService.getMinSalesPrices(interestingItems, importSource, authentication);
-        Map<Item, Double> itemVolumeHistoryInDestination = marketHistoryService.getAverageNumberOfSalesInPast7Days(itemsMinSellPrice.keySet(), importDestination, authentication);
-        Map<Item, List<MarketOrder>> destinationMarketOrdersForAllItems = structureMarketsService.getAllSellOrdersInStructure(importDestination, interestingItems, authentication);
-        List<ImportSuggestion> importSuggestions = buildImportSuggestions(destinationMarketOrdersForAllItems, itemsMinSellPrice, itemVolumeHistoryInDestination);
-        long processingTimeSeconds = (System.currentTimeMillis() - startTime) / 1000;
-        logger.info("Calculated import suggestions in {} seconds", processingTimeSeconds);
+        // Async call the APIs needed
+        CompletableFuture<MarketBuyPriceService.MinSalesPriceResults> itemsMinSellPrice = marketBuyPriceService.getMinSalesPrices(interestingItems, importSource, authentication);
+        CompletableFuture<MarketHistoryService.AverageSalesPriceResults> itemVolumeHistoryInDestination = marketHistoryService.getAverageNumberOfSalesInPast7Days(interestingItems, importDestination, authentication);
+        CompletableFuture<StructureMarketsService.StructureSellOrdersResults> destinationMarketOrdersForAllItems = structureMarketsService.getAllSellOrdersInStructure(importDestination, interestingItems, authentication);
 
-        return importSuggestions;
+        // Wait for all calls to complete
+        CompletableFuture.allOf(itemsMinSellPrice, itemVolumeHistoryInDestination, destinationMarketOrdersForAllItems);
+        try {
+            List<ImportSuggestion> importSuggestions = buildImportSuggestions(destinationMarketOrdersForAllItems.get().getResults(),
+                                                                              itemsMinSellPrice.get().getResults(),
+                                                                              itemVolumeHistoryInDestination.get().getResults());
+
+            long processingTimeSeconds = (System.currentTimeMillis() - startTime) / 1000;
+            logger.info("Calculated import suggestions in {} seconds", processingTimeSeconds);
+            return importSuggestions;
+
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Concurrent method call error", e);
+        }
     }
 
     private List<ImportSuggestion> buildImportSuggestions(Map<Item, List<MarketOrder>> destinationMarketOrdersForAllItems,
