@@ -1,4 +1,4 @@
-package com.github.stathvaille.marketimports.imports.controller;
+package com.github.stathvaille.marketimports.esi.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseESIController {
+public abstract class ESIClient {
 
     @Autowired
     protected OAuth2AuthorizedClientService authorizedClientService;
@@ -35,6 +35,5 @@ public abstract class BaseESIController {
         restTemplate.setInterceptors(interceptors);
         return restTemplate;
     }
-
 
 }

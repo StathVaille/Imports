@@ -1,6 +1,5 @@
 package com.github.stathvaille.marketimports.esi.service;
 
-import com.github.stathvaille.marketimports.imports.controller.BaseESIController;
 import com.github.stathvaille.marketimports.imports.domain.EveUser;
 import com.github.stathvaille.marketimports.esi.domain.CharacterLocation;
 import org.springframework.http.HttpEntity;
@@ -18,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Map;
 
 @Service
-public class MiscESIService extends BaseESIController {
+public class MiscESIService extends ESIClient {
 
     public EveUser getUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

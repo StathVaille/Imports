@@ -1,6 +1,6 @@
 package com.github.stathvaille.marketimports.imports.service;
 
-import com.github.stathvaille.marketimports.imports.controller.BaseESIController;
+import com.github.stathvaille.marketimports.esi.service.ESIClient;
 import com.github.stathvaille.marketimports.esi.domain.MarketOrder;
 import com.github.stathvaille.marketimports.imports.domain.location.ImportLocation;
 import com.github.stathvaille.marketimports.imports.domain.staticdataexport.Item;
@@ -18,7 +18,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class StructureMarketsService extends BaseESIController {
+public class StructureMarketsService extends ESIClient {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final MultiPageESIRequest<MarketOrder> multiPageESIRequest = new MultiPageESIRequest<>();

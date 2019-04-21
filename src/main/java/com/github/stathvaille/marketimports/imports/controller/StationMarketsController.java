@@ -1,6 +1,7 @@
 package com.github.stathvaille.marketimports.imports.controller;
 
 import com.github.stathvaille.marketimports.esi.domain.MarketOrder;
+import com.github.stathvaille.marketimports.esi.service.ESIClient;
 import com.github.stathvaille.marketimports.imports.domain.location.ImportLocation;
 import com.github.stathvaille.marketimports.imports.service.StructureMarketsService;
 import org.slf4j.Logger;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class StationMarketsController extends BaseESIController {
+public class StationMarketsController extends ESIClient {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired

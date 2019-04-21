@@ -1,10 +1,11 @@
 package com.github.stathvaille.marketimports.esi.domain;
 
+import lombok.Data;
 import lombok.Value;
 
 import java.util.Date;
 
-@Value
+@Data
 public class MarketOrder {
     private long order_id;
     private long type_id;
@@ -17,4 +18,5 @@ public class MarketOrder {
     private long duration;
     private Date issued;
     private String range;
+    private long system_id;
 }

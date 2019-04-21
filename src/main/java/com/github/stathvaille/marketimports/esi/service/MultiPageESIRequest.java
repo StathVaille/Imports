@@ -51,7 +51,13 @@ public class MultiPageESIRequest<T> {
         logger.info(String.format("Getting page %d/%d at endpoint: %s", pageNumber, totalNumberOfPages, pageUri.toString()));
         MultiValueMap<String, String> requestHeaders = new HttpHeaders();
         HttpEntity<?> entity = new HttpEntity<>(requestHeaders); // for request
-        HttpEntity<List<T>> response = restTemplate.exchange(pageUri, HttpMethod.GET, entity, esiObjectType);
-        return response.getBody();
+
+        try {
+            HttpEntity<List<T>> response = restTemplate.exchange(pageUri, HttpMethod.GET, entity, esiObjectType);
+            return response.getBody();
+        }
+        catch (Exception e) {
+            throw new RuntimeException("error", e);
+        }
     }
 }

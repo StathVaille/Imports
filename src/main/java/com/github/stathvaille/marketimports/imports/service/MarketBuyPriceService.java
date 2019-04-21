@@ -1,6 +1,6 @@
 package com.github.stathvaille.marketimports.imports.service;
 
-import com.github.stathvaille.marketimports.imports.controller.BaseESIController;
+import com.github.stathvaille.marketimports.esi.service.ESIClient;
 import com.github.stathvaille.marketimports.esi.domain.MarketOrder;
 import com.github.stathvaille.marketimports.imports.domain.location.ImportLocation;
 import com.github.stathvaille.marketimports.imports.domain.staticdataexport.Item;
@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
  * Example URL: https://esi.evetech.net/latest/markets/10000043/orders/?datasource=tranquility&order_type=sell&page=2
  */
 @Service
-public class MarketBuyPriceService extends BaseESIController {
+public class MarketBuyPriceService extends ESIClient {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final MultiPageESIRequest<MarketOrder> multiPageESIRequest;

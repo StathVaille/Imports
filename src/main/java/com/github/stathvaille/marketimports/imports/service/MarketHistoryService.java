@@ -1,6 +1,6 @@
 package com.github.stathvaille.marketimports.imports.service;
 
-import com.github.stathvaille.marketimports.imports.controller.BaseESIController;
+import com.github.stathvaille.marketimports.esi.service.ESIClient;
 import com.github.stathvaille.marketimports.imports.domain.location.ImportLocation;
 import com.github.stathvaille.marketimports.imports.domain.staticdataexport.Item;
 import org.slf4j.Logger;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  * https://esi.tech.ccp.is/latest/markets/10000014/history/?datasource=tranquility&type_id=2185
  */
 @Service
-public class MarketHistoryService extends BaseESIController {
+public class MarketHistoryService extends ESIClient {
 
     private static final String apiTemplate = "https://esi.evetech.net/latest/markets/%s/history/?datasource=tranquility&type_id=%s";
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

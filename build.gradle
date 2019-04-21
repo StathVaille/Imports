@@ -1,6 +1,7 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.4.RELEASE'
+//		springBootVersion = '2.0.4.RELEASE'
+		springBootVersion = '2.1.4.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -17,7 +18,7 @@ apply plugin: 'io.spring.dependency-management'
 
 
 jar {
-	baseName = 'demo'
+	baseName = 'marketimports'
 	version = '0.0.2-SNAPSHOT'
 }
 
@@ -29,23 +30,23 @@ repositories {
 }
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-web')
-    compile('org.projectlombok:lombok')
-    compile('com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.8.4')
-	compile("org.springframework.boot:spring-boot-starter-security")
-	compile("org.springframework.security:spring-security-oauth2-client")   // Spring boot 2.0
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.projectlombok:lombok'
+    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.8.4'
+	compile 'org.springframework.boot:spring-boot-starter-security'
+	compile 'org.springframework.security:spring-security-oauth2-client'  // Spring boot 2.0
 
 	// Web
-	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-    compile("org.springframework.boot:spring-boot-devtools")
+	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    compile 'org.springframework.boot:spring-boot-devtools'
 	compile 'org.webjars:bootstrap:4.1.3'
 	compile 'org.webjars:jquery:3.3.1-1'
     compile 'org.webjars:webjars-locator-core'
     compile 'org.webjars:bootstrap-table:1.9.1-1'
 
     // swagger
-	compile('io.springfox:springfox-swagger2:2.4.0')
-    compile('io.springfox:springfox-swagger-ui:2.4.0')
+	compile 'io.springfox:springfox-swagger2:2.4.0'
+    compile 'io.springfox:springfox-swagger-ui:2.4.0'
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
